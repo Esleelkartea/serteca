@@ -1,0 +1,76 @@
+#nav li {
+  /*float the main list items*/
+  margin: 0;
+  float: left;
+  display: block;
+  padding-right: 3px;
+}
+
+
+#nav li a {
+  /*for all links in the list*/
+  color: #f90;
+  font:12px Georgia,Serif;
+  font-weight: bold;
+  display: block;
+  height: 15px;
+  width: 100px;
+ /* border: 1px solid #29497b;*/
+  padding: 3px;
+  text-decoration:none
+}
+
+#nav li.off ul {
+  /*put the subnavs below and hide them all*/
+  display: none;
+  position: absolute;
+  top: 33px;
+  height: 15px;
+  left: 0;
+  padding-top: 3px;
+}
+
+#nav li.on a {
+  /*change border color for active topic area*/
+ /* border: 1px solid #f90;*/font:12px Georgia,Serif;
+  text-decoration:none
+}
+
+#nav li.on ul {
+  /*display active subnav list*/
+  display: block;
+}
+#nav li.on ul a, #nav li.off ul a {
+  float: left;
+  /*ie doesn't inherit the float*/
+ /* border: 1px solid #29497b;*/
+  color: #f90;
+  width: auto;
+  
+  text-decoration:none
+}
+
+#nav li.off:hover ul {
+  /*  display the other topics when
+      their parent is hovered */
+  display: block;
+  z-index: 6000;
+}
+#nav li.off ul, #nav li.on ul {
+  /*put the subnav below*/
+  top: 33px;
+  *top: 44px; /*reposition for IE*/
+}
+
+#nav li.off:hover ul, #nav li.over ul { 
+  display: block;
+  z-index: 6000;
+}
+
+#nav li.off a:hover,
+#nav li:hover a,
+#nav li.over a {
+  /*background: #FFF; *//*#29497b;*/
+  color: #f90;
+  text-decoration:none
+}

@@ -1,0 +1,140 @@
+<html>
+<head>
+<title>Serteca-Gestión de Modelos</title>
+<link href="/serteca/css/admin.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" media="all" href="/serteca/css/calendar.css"/>
+<script src="/serteca/js/utils/prototype.js" type="text/javascript"></script>
+<script src="/serteca/js/utils/scriptaculous.js" type="text/javascript"></script>
+<script src='/serteca/js/utils/rico.js' type="text/javascript"></script>
+<script src='/serteca/js/utils/zk_widgets.js' type="text/javascript"></script>
+<script type="text/javascript" src="/serteca/js/utils/zk_editors.js"></script>
+<script type="text/javascript" src="/serteca/js/utils/calendar.js"></script>
+<script type="text/javascript" src="/serteca/js/utils/calendar-setup.js"></script>							
+<script type="text/javascript" src="/serteca/js/utils/calendar-lang/calendar-es.js"></script>
+<script language="javascript" type="">
+function preCarga() 
+{
+ var num_lineas_visibles = 10;
+ var campos = new Array("ID","NOMBRE","MARCA");
+ var i=0,j=0,str="",strH="";
+ strH= strH + "<table border='1' id='data_grid_header_modelo' name='data_grid_header_modelo'><tr>";
+ for (j=0;j<campos.length;j++)
+ {
+ 	strH = strH + "<th style='width:80px'>" + campos[j] + "</th>";
+ }
+ strH = strH + "</tr></table>"; 
+ $(div_header_modelo).innerHTML=strH;
+ str = "<table border='1' id='dinamic_grid_data_modelo' name='dinamic_grid_data_modelo'>"
+ for (i=0;i<num_lineas_visibles;i++)
+ {
+ 	str = str + "<tr>";
+ 	for (j=0;j<campos.length;j++)
+ 	{
+ 		str = str + "<td style='width:80px'>&nbsp;</td>";
+ 	}
+ 	str = str + "</tr>";
+ }
+ str = str + "</table>";
+ $(viewPort).innerHTML=str;
+ 
+}
+
+ function filtrarModelo()
+ { 
+  var regg = new regist();
+  regg.addElemento(new editor('NORMAL','/serteca/Modelo/UpdateNombreServlet',1,'NombreParsed',null));
+  regg.addElemento(new editor('AUTO','/serteca/Modelo/UpdateMarcaIdServlet',2,'MarcaIdParsed','/serteca/Marca/MarcaUlContentServlet'));
+  
+  var viewedRows = 8;
+  var linkedServlet= '/serteca/Modelo/ModeloTableContentServlet';
+  var dinamic_grid_data_id = 'dinamic_grid_data_modelo';
+  var inputQueryId = 'queryModelo';
+  try{
+   $(myLiveRicoGridModelo);
+  }catch (Exception){
+   myLiveRicoGridModelo =  new Ajax.ZkLiveGrid(
+   											dinamic_grid_data_id, 
+   											viewedRows,
+   											viewedRows,
+   											linkedServlet,
+   											regg,
+   											{}
+   								);
+   }
+   myLiveRicoGridModelo.setRequestParams('query=' + $(inputQueryId).value);
+   myLiveRicoGridModelo.resetContents();
+   myLiveRicoGridModelo.requestContentRefresh(0);
+   ajaxEngine.registerAjaxObject( 'configureWebSearchRows',   
+   								new SearchRowsConfigurator(myLiveRicoGridModelo, viewedRows));
+ } 
+
+ </script>
+</head>
+<body onLoad="preCarga();filtrarModelo();">
+			  
+<div id="modelo">
+
+ <div id="modelo_header">
+  Modelo &nbsp;
+   <input type="text" name="queryModelo" id="queryModelo" value=""/>
+  <script language="javaScript">
+	new Form.Element.DelayedObserver('queryModelo','0.5',filtrarModelo);
+  </script>
+ </div>
+ <div id="tabla_dinamica_modelo">
+
+  <div id="div_header_modelo">
+
+  </div> 
+   <div id="container">
+   <div id="viewPort">
+
+   </div>
+  </div>
+ </div>
+</div> 
+<div id="alta_dinamica_modelo">
+ <div> 
+  Alta modelo &nbsp;
+ </div>
+ <div id="alta_dinamica_modelo_form">
+  <form action="" name="altaModeloForm" id="altaModeloForm" method="POST">
+  <table summary="tabla de alta de Modelo">
+   <tr>
+	<td><b>Nombre</b></td>
+	<td><input type="text"  name="Modelos.NOMBRE" id="Modelos.NOMBRE" value="" >
+	</td>	
+   </tr>
+   <tr>
+	<td><b>Marca</b></td>
+	<td><input type="text" name="Modelos.MARCA_ID" id="Modelos.MARCA_ID" value="" >
+	<div id="MarcasUpdate" style="display:none;border:1px solid black;background-color:white;overflow:auto;height:300px"></div>
+	</td>	
+   </tr>
+   	<script type="text/javascript" language="javascript" charset="ISO-8859-1">
+		// <![CDATA[
+	 		new Ajax.Autocompleter('Modelos.MARCA_ID','MarcasUpdate','/serteca/Marca/MarcaUlContentServlet',{});
+		// ]]>
+	</script>
+	<tr>
+	 <td colspan="2"><a href="#" onclick="altaModelo($(altaModeloForm))">Aceptar</a></td>
+	</tr>
+	<script language="javascript" type="text/javascript">
+	function altaModelo(form)
+	{
+		new Ajax.Request("/serteca/Modelo/AddModeloServlet",{ 
+													  parameters:Form.serialize(form),
+													  asynchronous:false
+													  }
+		);
+		Form.reset(form);
+		filtrarModelo();
+	}		
+	</script>
+  </table>
+  </form>
+ </div>
+</div>
+
+</body>
+</html>

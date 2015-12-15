@@ -1,0 +1,32 @@
+
+
+      
+      
+   #nav-modelos,#nav-marcas,#nav-alarmas, #nav-trabajadores,#nav-vehiculosCortesia{
+      background:url("../img/left_both_7.gif") no-repeat left top;
+      }
+     #titulo_Modelos, #nav-modelos a,#titulo_Marcas,#nav-marcas a,#nav-alarmas a,#titulo_Trabajadores, #nav-trabajadores a,#titulo_Vehiculos_Cortesia, #nav-vehiculosCortesia a{
+      background:url("../img/right_both_7.gif") no-repeat right top;
+      }
+
+    #nav-vehiculos,#nav-clientes,#nav-prestamos,#nav-reparaciones, #nav-ordenesTrabajo {
+      background:url("../img/left_both_1.gif") no-repeat left top;
+      }
+
+    #titulo_Vehiculos, #nav-vehiculos a ,#titulo_Clientes,#nav-clientes a,#titulo_Prestamos, #nav-prestamos a,#titulo_Reparaciones, #nav-reparaciones a,#titulo_Ordenes_Trabajo, #nav-ordenesTrabajo a {
+      background:url("../img/right_both_1.gif") no-repeat right top;
+      }        
+      
+ 
+    #nav-facturas, #nav-lineasFactura {
+      background:url("../img/left_both_4.gif") no-repeat left top;
+      }
+
+    #titulo_Facturas, #nav-facturas a, #titulo_Lineas_Factura, #nav-lineasFactura a {
+      background:url("../img/right_both_4.gif") no-repeat right top;
+      }                        
+ 
+      
+      #alarmas span {display:block;}
+      #alarmas div {display:block;float:left;width:100%;padding-left:22px;background: url(../img/inicio.gif) 0 0 no-repeat;font-size:16px;font-weight:bold;}
+      .inicio li{display:table-cell;float:left;list-style:none;padding-left:22px;background: url(../img/inicio.gif) 0 0 no-repeat;}

@@ -1,0 +1,11 @@
+pm.addProfile("0", "administrador");
+pm.addProfile("1", "usuario");
+pm.addProfile("2", "cliente");
+		
+pm.grant(pm.getProfileByName("administrador"), "\\S*");
+pm.grant(pm.getProfileByName("usuario"), "\\S*");
+pm.grant(pm.getProfileByName("cliente"), "\\S*");
+pm.revoke(pm.getProfileByName("usuario"), "/admin/\\S*");
+
+//Una wildcard de prueba
+//pm.wildcard("/General/HomePageServlet");

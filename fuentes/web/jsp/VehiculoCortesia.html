@@ -1,0 +1,185 @@
+<html>
+<head>
+<title>Serteca-HomePage</title>
+<link href="/serteca/css/admin.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" media="all" href="/serteca/css/calendar.css"/>
+<script src="/serteca/js/utils/prototype.js" type="text/javascript"></script>
+<script src="/serteca/js/utils/scriptaculous.js" type="text/javascript"></script>
+<script src='/serteca/js/utils/rico.js' type="text/javascript"></script>
+<script src='/serteca/js/utils/zk_widgets.js' type="text/javascript"></script>
+<script type="text/javascript" src="/serteca/js/utils/calendar.js"></script>
+<script type="text/javascript" src="/serteca/js/utils/calendar-setup.js"></script>							
+<script type="text/javascript" src="/serteca/js/utils/calendar-lang/calendar-es.js"></script>
+
+<script language="javascript" type="">
+function preCarga()
+{
+ var num_lineas_visibles = 10;
+ var campos = new Array("id serial","modelo_id","version","matricula","cliente_id","color","observacion","estado");
+ var i=0,j=0,str="",strH="";
+ strH= strH + "<table border='1' id='data_grid_header_vehiculo_cortesia' name='data_grid_header_vehiculo_cortesia'><tr>";
+ for (j=0;j<campos.length;j++)
+ {
+ 	strH = strH + "<th style='width:80px'>" + campos[j] + "</th>";
+ }
+ strH = strH + "</tr></table>"; 
+ $(div_header_vehiculo_cortesia).innerHTML=strH;
+ str = "<table border='1' id='dinamic_grid_data_vehiculo_cortesia' name='dinamic_grid_data_vehiculo_cortesia'>"
+ for (i=0;i<num_lineas_visibles;i++)
+ {
+ 	str = str + "<tr>";
+ 	for (j=0;j<campos.length;j++)
+ 	{
+ 		str = str + "<td style='width:80px'>&nbsp;a</td>";
+ 	}
+ 	str = str + "</tr>";
+ }
+ str = str + "</table>";
+ $(viewPort).innerHTML=str;
+ 
+}
+ function filtrarVehiculoCortesia()
+ { 
+  var viewedRows = 8;
+  var linkedServlet= '/serteca/VehiculoCortesia/VehiculoCortesiaTableContentServlet';
+  var dinamic_grid_data_id = 'dinamic_grid_data_vehiculo_cortesia';
+  var inputQueryId = 'queryVehiculoCortesia';
+  try{
+   $(myLiveRicoGridVehiculoCortesia);
+  }catch (Exception){
+   myLiveRicoGridVehiculoCortesia =  new Rico.LiveGrid(dinamic_grid_data_id, viewedRows,viewedRows+1,linkedServlet,{},{});
+   myLiveRicoGridVehiculoCortesia.setRequestParams('query=' + $(inputQueryId).value);
+   myLiveRicoGridVehiculoCortesia.resetContents();
+   myLiveRicoGridVehiculoCortesia.requestContentRefresh(0);
+   ajaxEngine.registerAjaxObject('configureWebSearchRows',new SearchRowsConfigurator(myLiveRicoGridVehiculoCortesia,viewedRows));
+ }
+
+  function vehiculoCortesiaEditRegist()
+  {
+   var tabla = $('dinamic_grid_data_vehiculo_cortesia');
+   var tds = tabla.getElementsByTagName("span");
+   var primaryKey;
+   var clave;
+   var reg = /[A-Za-z]*/g; 
+   var regMethod = /get|[0-9]*/g;
+   if ($(editable).value=="off")
+   {
+   for(i=0;i< tds.length; i++)
+   {
+    clave = tds[i].getAttribute("id");
+    method = clave.replace(regMethod,"");
+    primaryKey = clave.replace(reg,"");
+    //alert("metodo: "+method);
+    //alert("primaryKey: "+primaryKey);    
+    if(method=="MatriculaParsed")
+    {
+    	new Ajax.ZkInPlaceEditor(tds[i], '/serteca/VehiculoCortesia/UpdateMatriculaServlet',primaryKey, '/olatxu/Cliente/LocalidadUlContentServlet',{});
+    }
+    else if(method == "VersionParsed")
+    {
+        new Ajax.ZkInPlaceEditor(tds[i], '/serteca/VehiculoCortesia/UpdateVersionServlet',primaryKey, {});
+    }
+    else if(method == "ColorParsed")
+    {
+        new Ajax.ZkInPlaceEditor(tds[i], '/serteca/VehiculoCortesia/UpdateColorServlet',primaryKey, {});
+    }
+    
+   }
+   $(editable).value="on";
+   }
+  }
+  }
+ </script>
+
+
+</head>
+<body onLoad="preCarga();filtrarVehiculoCortesia();">
+			  
+<div id="vehiculoCortesia">
+
+
+ <div id="vehiculoCortesia_header">
+  <form action="" name="listado" id="listado" method="POST">
+   Vehiculo cortesia &nbsp;
+    <input type="hidden" id="editable" name="editable" value="off">
+    <input type="button" value="editar" onclick="vehiculoCortesiaEditRegist()" accesskey="C"/>
+    <input type="text" name="queryTrabajador" id="queryVehiculoCortesia" value=""/>
+    <!--<input type="button" value="click" onclick="filtrarVehiculoCortesia()"/>-->
+  </from> 
+  <script language="javaScript">
+	new Form.Element.DelayedObserver('queryVehiculoCortesia','0.5',filtrarVehiculoCortesia);
+  </script>
+ </div>
+ <div id="tabla_dinamica_vehiculo_cortesia">
+
+  <div id="div_header_vehiculo_cortesia">
+
+  </div>
+  <div id="container">
+   <div id="viewPort" ondblclick='vehiculoCortesiaEditRegist()' >
+
+   </div>
+  </div>
+ </div>
+</div>
+
+<div id="alta_dinamica_vehiculo_cortesia">
+ <div> 
+  Alta Vehiculo Cortesia &nbsp;
+ </div>
+ <div id="alta_dinamica_vehiculo_cortesia_form">
+  <form action="" name="altaVehiculoCortesiaForm" id="altaVehiculoCortesiaForm" method="POST">
+  <table summary="tabla de alta de trabajador">
+   <tr>
+	<td><b>Modelo</b></td>
+	<!--Importante: el atributo Name de los input deben tener el formato "nombre tabla" (como en el esquema)+ "punto" + "nombre del campo"(en mayusculas) -->
+	<td><input type="text"  name="Vehiculos_Cortesia.MODELO_ID" id="Vehiculos_Cortesia.MODELO_ID" value="" ></td>
+   </tr>
+   <tr>
+	<td><b>version</b></td>
+	<td><input type="text"  name="Vehiculos_Cortesia.VERSION" id="Vehiculos_Cortesia.VERSION" value="" ></td>
+   </tr>
+   <tr>
+	<td><b>matricula</b></td>
+	<td><input type="text"  name="Vehiculos_Cortesia.MATRICULA" id="Vehiculos_Cortesia.MATRICULA" value="" ></td>
+   </tr>
+   <tr>
+	<td><b>Cliente</b></td>
+	<td><input type="text"  name="Vehiculos_Cortesia.CLIENTE_id" id="Vehiculos_Cortesia.CLIENTE_id" value="" ></td>
+   </tr>      
+   <tr>
+    <tr>
+	<td><b>color</b></td>
+	<td><input type="text"  name="Vehiculos_Cortesia.COLOR" id="Vehiculos_Cortesia.COLOR" value="" ></td>
+   </tr>      
+   <tr>
+    <tr>
+	<td><b>observacion</b></td>
+	<td><input type="text"  name="Vehiculos_Cortesia.OBSERVACION" id="Vehiculos_Cortesia.OBSERVACION" value="" ></td>
+   </tr>      
+   <tr>
+    <tr>
+	<td><b>estado</b></td>
+	<td><input type="text"  name="Vehiculos_Cortesia.ESTADO" id="Vehiculos_Cortesia.ESTADO" value="" ></td>
+   </tr>      
+   <tr>
+	 <td colspan="2"><a href="#" onclick="altaVehiculoCortesia($(altaVehiculoCortesiaForm))">Aceptar</a></td>
+	</tr>
+	<script language="javascript" type="text/javascript">
+	function altaVehiculoCortesia(form)
+	{
+		new Ajax.Request("/serteca/VehiculoCortesia/AddVehiculoCortesiaServlet",{ 
+													  parameters:Form.serialize(form)
+													  }
+		);
+		Form.reset(form);
+		filtrarVehiculoCortesia();
+	}		
+	</script>
+  </table>
+  </form>
+ </div>
+</div>
+
+</body>
+</html>

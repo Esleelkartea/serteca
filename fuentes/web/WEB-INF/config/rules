@@ -1,0 +1,3 @@
+router.addRule("^/$","/jsp/Administracion.html");
+router.addRule("^/pruebas$","/jsp/Administracion2.html");
+router.addRule("^/jose[a-z]*$","/jsp/Trabajador.html");

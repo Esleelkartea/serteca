@@ -1,0 +1,197 @@
+<html>
+<head>
+<title>Serteca-HomePage</title>
+<script src="/serteca/js/utils/prototype.js" type="text/javascript"></script>
+<script src="/serteca/js/utils/scriptaculous.js" type="text/javascript"></script>
+<script src='/serteca/js/utils/rico.js' type="text/javascript"></script>
+<script src='/serteca/js/utils/zk_widgets.js' type="text/javascript"></script>
+<script type="text/javascript" src="/serteca/js/utils/zk_editors.js"></script>
+<script type="text/javascript" src="/serteca/js/utils/calendar.js"></script>
+<script type="text/javascript" src="/serteca/js/utils/calendar-setup.js"></script>							
+<script type="text/javascript" src="/serteca/js/utils/calendar-lang/calendar-es.js"></script>
+
+<script type="text/javascript" src="/serteca/js/utils/zk_utils.js"></script>
+
+<link href="/serteca/css/admin.css" rel="stylesheet" type="text/css">
+<link href="/serteca/css/dinamic_grid.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" media="all" href="/serteca/css/calendar.css"/>
+
+<script language="javascript" type="">
+function preCarga()
+{
+ var num_lineas_visibles = 10;
+ var campos = new Array("Nombre","Apellidos","Fecha-Alta","Fecha-Baja","Nombre Apellidos");
+ var i=0,j=0,str="",strH="";
+ strH= strH + "<table border='1' id='data_grid_header_trabajador' name='data_grid_header_trabajador'><tr>";
+ for (j=0;j<campos.length;j++)
+ {
+ 	strH = strH + "<th style='width:80px'>" + campos[j] + "</th>";
+ }
+ strH = strH + "</tr></table>"; 
+ $('div_header_trabajador').innerHTML=strH;
+ str = "<table border='1' id='dinamic_grid_data_trabajador' name='dinamic_grid_data_trabajador'>"
+ for (i=0;i<num_lineas_visibles;i++)
+ {
+ 	str = str + "<tr>";
+ 	for (j=0;j<campos.length;j++)
+ 	{
+ 		str = str + "<td style='width:80px'>&nbsp;a</td>";
+ 	}
+ 	str = str + "</tr>";
+ }
+ str = str + "</table>";
+ $('viewPort').innerHTML=str;
+ 
+}
+
+function allee(element, id){
+	alert("desde allee id: "+id);
+	alert("desde allee element: "+element.id);
+}
+
+ function filtrarTrabajador(elm, value, params)
+ { 
+
+  var regg = new regist();
+
+  regg.addElemento(new editor('FREE',imprimirFactura,3,'NombreParsed',null));
+  regg.addElemento(new editor('NORMAL','/serteca/Trabajador/UpdateNombreServlet',1,'',null));
+  regg.addElemento(new editor('DATE','/serteca/Trabajador/UpdateFechaAltaServlet',3,'FechaAltaParsed',null));
+  regg.addElemento(new editor('FREE',detalleFactura,3,'ApellidosParsed',null));
+  regg.addElemento(new editor('AUTO','/serteca/Trabajador/UpdateFechaBajaServlet',4,'FechaBajaParsed','/serteca/Trabajador/TrabajadorUlContentServlet'));
+  
+
+  var viewedRows = 8;
+  var linkedServlet= '/serteca/Trabajador/TrabajadorPruebaTableContentServlet';
+  var dinamic_grid_data_id = 'dinamic_grid_data_trabajador';
+  var inputQueryId = 'queryTrabajador';
+  try{
+   $(myLiveRicoGridTrabajador);
+  }catch (Exception){
+   myLiveRicoGridTrabajador =  new Ajax.ZkLiveGrid(
+   											dinamic_grid_data_id, 
+   											viewedRows,
+   											viewedRows,
+   											linkedServlet,
+   											regg,
+   											{}
+   								);
+   }
+   myLiveRicoGridTrabajador.setRequestParams('query=' + $(inputQueryId).value);
+   myLiveRicoGridTrabajador.resetContents();
+   myLiveRicoGridTrabajador.requestContentRefresh(0);
+   ajaxEngine.registerAjaxObject( 'configureWebSearchRows',   
+   								new SearchRowsConfigurator(myLiveRicoGridTrabajador, viewedRows));
+ } 
+</script>
+
+
+<script type="text/javascript">
+ function detalleFactura(elem, id)
+ {
+  pars = "Trabajadores.ID="+id;
+  new Ajax.Request("/serteca/Trabajador/GetTrabajadorDetalleXmlServlet",{method: 'post',parameters: pars, onComplete: trabajador_process_response});
+ }
+  
+ function trabajador_process_response(originalRequest)
+ {
+ 	var arr = new Array();
+ 	arr["Apellidos"] = "Trabajadores_APELLIDOS";
+ 	arr["Nombre"] = "Trabajadores_NOMBRE";
+ 	
+
+ 	var xmlDocument = originalRequest.responseXML;
+
+    var xmlTarabajador=  xmlDocument.getElementsByTagName("Trabajador");
+	ProcessXML(xmlTarabajador[0],$H(arr));
+	
+ }
+  function imprimirFactura(elem, id)
+ {
+  pars = "Trabajadores.ID="+id;
+  window.open("/serteca/Trabajador/GetTrabajadorDetallePdfServlet?"+pars);
+ }
+ 
+ 
+</script>
+
+<script language="javascript">
+	var myGlobalHandlers = {
+		onCreate: function(){
+			
+			document.body.style.cursor = "wait";
+		},
+
+		onComplete: function() {
+			if(Ajax.activeRequestCount == 0){
+				
+				document.body.style.cursor = "auto";				
+			}
+		}
+	};
+
+	Ajax.Responders.register(myGlobalHandlers);
+</script>
+
+
+</head>
+<body onLoad="preCarga();filtrarTrabajador();Element.hide('systemWorking');">			  
+<div id="trabajador">
+	<div id="trabajador_header">
+		Trabajador &nbsp;
+		<input type="text" name="queryTrabajador" id="queryTrabajador" value=""/>&nbsp;<div id='systemWorking'>Looo.</div>
+		<script language="javaScript">
+			new Form.Element.DelayedObserver('queryTrabajador','0.5',filtrarTrabajador, "PARA joselu");
+		</script>
+	</div>
+	<div id="tabla_dinamica_trabajador">
+		<div id="div_header_trabajador"></div>
+		<div id="container">
+			<div id="viewPort"></div>
+		</div>
+	</div>
+</div>
+
+<div id="alta_dinamica_trabajador">
+ <div> 
+  Alta marca &nbsp;
+ </div>
+ <div id="alta_dinamica_trabajador_form">
+  <form action="" name="altaTrabajadorForm" id="altaTrabajadorForm" method="POST">
+  <table summary="tabla de alta de trabajador">
+   <tr>
+	<td><b>Nombre</b></td>
+	<td><input type="text"  name="Trabajadores.NOMBRE" id="Trabajadores_NOMBRE" value="" ></td>
+   </tr>
+   <tr>
+	<td><b>Apellidos</b></td>
+	<td><input type="text"  name="Trabajadores.APELLIDOS" id="Trabajadores_APELLIDOS" value="" ></td>
+   </tr>
+   <tr>
+	<td><b>Alta</b></td>
+	<td><input type="text"  name="Trabajadores.FECHA_ALTA" id="Trabajadores.FECHA_ALTA" value="" ></td>
+   </tr>
+   <tr>
+	<td><b>Baja</b></td>
+	<td><input type="text"  name="Trabajadores.FECHA_BAJA" id="Trabajadores.FECHA_BAJA" value="" ></td>
+   </tr>      
+   <tr>
+	 <td colspan="2"><a href="#" onclick="altaTrabajador($(altaTrabajadorForm))">Aceptar</a></td>
+	</tr>
+	<script language="javascript" type="text/javascript">
+	function altaTrabajador(form)
+	{
+		new Ajax.Request("/serteca/Trabajador/AddTrabajadorServlet",{ 
+													  parameters:Form.serialize(form)
+													  }
+		);
+		Form.reset(form);
+		filtrarTrabajador();
+	}		
+	</script>
+  </table>
+  </form>
+ </div>
+</div>
+</body>
+</html>

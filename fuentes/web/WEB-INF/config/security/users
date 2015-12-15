@@ -1,0 +1,3 @@
+um.addUser("zylk", "zylk zylkito", "password", "administrador");
+um.addUser("eder", "eder hernandez", "password", "usuario");
+um.addUser("gus", "gustavo fernandez", "password", "cliente");

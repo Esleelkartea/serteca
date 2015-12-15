@@ -1,0 +1,92 @@
+<html>
+<head>
+<title>Serteca-Gesti&oacute;n de Marcas</title>
+<link href="/serteca/css/admin.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" media="all" href="/serteca/css/calendar.css"/>
+<script src="/serteca/js/utils/prototype.js" type="text/javascript"></script>
+<script src="/serteca/js/utils/scriptaculous.js" type="text/javascript"></script>
+<script src='/serteca/js/utils/rico.js' type="text/javascript"></script>
+<script src='/serteca/js/utils/zk_widgets.js' type="text/javascript"></script>
+<script type="text/javascript" src="/serteca/js/utils/zk_editors.js"></script>
+<script type="text/javascript" src="/serteca/js/utils/calendar.js"></script>
+<script type="text/javascript" src="/serteca/js/utils/calendar-setup.js"></script>							
+<script type="text/javascript" src="/serteca/js/utils/calendar-lang/calendar-es.js"></script>
+<script language="javascript" type="">
+function preCarga()
+{
+ var num_lineas_visibles = 10;
+ var campos = new Array("Localidad","Provincia");
+ var i=0,j=0,str="",strH="";
+ strH= strH + "<table border='1' id='data_grid_header_localidad' name='data_grid_header_localidad'><tr>";
+ for (j=0;j<campos.length;j++)
+ {
+ 	strH = strH + "<th style='width:80px'>" + campos[j] + "</th>";
+ }
+ strH = strH + "</tr></table>"; 
+ $(div_header_localidad).innerHTML=strH;
+ str = "<table border='1' id='dinamic_grid_data_localidad' name='dinamic_grid_data_localidad'>"
+ for (i=0;i<num_lineas_visibles;i++)
+ {
+ 	str = str + "<tr>";
+ 	for (j=0;j<campos.length;j++)
+ 	{
+ 		str = str + "<td style='width:80px'>&nbsp;</td>";
+ 	}
+ 	str = str + "</tr>";
+ }
+ str = str + "</table>";
+ $(viewPort).innerHTML=str;
+ 
+}
+ function filtrarLocalidad()
+ { 
+  //var regg = new regist();
+  //regg.addElemento(new editor('NORMAL','/serteca/Localidad/UpdateLocalidadServlet',2,'NombreParsed',null,null));
+    
+  var viewedRows = 8;
+  var linkedServlet= '/serteca/Localidad/LocalidadTableContentServlet';
+  var dinamic_grid_data_id = 'dinamic_grid_data_localidad';
+  var inputQueryId = 'queryLocalidad';
+  try{
+   $(myLiveRicoGridLocalidad);
+  }catch (Exception){
+   myLiveRicoGridLocalidad =  new Ajax.ZkLiveGrid(
+   											dinamic_grid_data_id, 
+   											viewedRows,
+   											viewedRows,
+   											linkedServlet,
+   											//regg,
+											null,
+   											{}
+   								);
+   }
+   myLiveRicoGridLocalidad .setRequestParams('query=' + $(inputQueryId).value);
+   myLiveRicoGridLocalidad .resetContents();
+   myLiveRicoGridLocalidad .requestContentRefresh(0);
+   ajaxEngine.registerAjaxObject( 'configureWebSearchRows',new SearchRowsConfigurator(myLiveRicoGridLocalidad, viewedRows));
+ } 
+ </script>
+
+</head>
+<body onLoad="preCarga();filtrarLocalidad();">			  
+<div id="localidad">
+ <div id="localidad_header">
+   Vehiculo &nbsp;
+    <input type="text" name="queryLocalidad" id="queryLocalidad" value=""/>
+  <script language="javaScript">
+	new Form.Element.DelayedObserver('queryLocalidad','0.5',filtrarLocalidad);
+  </script>
+ </div>
+ <div id="tabla_dinamica_localidad">
+  <div id="div_header_localidad">
+  </div>
+  <div id="container">
+   <div id="viewPort">
+   </div>
+  </div>
+ </div>
+</div>
+
+
+</body>
+</html>

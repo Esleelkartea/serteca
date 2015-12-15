@@ -1,0 +1,37 @@
+1;Aprendiz - Mecánicos Generales, Ajustadores, Rectificadores, Electricistas, Carburadores, Encendido, Frenos y Torneros
+2;Aprendiz Adelantado - Mecánicos Generales, Ajustadores, Rectificadores, Electricistas, Carburadores, Encendido, Frenos y Torneros
+3;Medio Oficial - Mecánicos Generales, Ajustadores, Rectificadores, Electricistas, Carburadores, Encendido, Frenos y Torneros
+4;Oficial 2º - Mecánicos Generales, Ajustadores, Rectificadores, Electricistas, Carburadores, Encendido, Frenos y Torneros
+5;Oficial 1º - Mecánicos Generales, Ajustadores, Rectificadores, Electricistas, Carburadores, Encendido, Frenos y Torneros
+6;Aprendiz - Chapistas, Soldadores de Eléctrica, de Autógena y/o Radiadores
+7;Aprendiz Adelantado - Chapistas, Soldadores de Eléctrica, de Autógena y/o Radiadores
+8;Medio Oficial - Chapistas, Soldadores de Eléctrica, de Autógena y/o Radiadores
+9;Oficial 2º - Chapistas, Soldadores de Eléctrica, de Autógena y/o Radiadores
+10;Oficial 1º - Chapistas, Soldadores de Eléctrica, de Autógena y/o Radiadores
+11;Aprendiz - Carpinteros, Tapiceros, Herreros, Pintores, Lustradores, Armadores de Cristales y Finiciones
+12;Aprendiz Adelantado - Carpinteros, Tapiceros, Herreros, Pintores, Lustradores, Armadores de Cristales y Finiciones
+13;Medio Oficial - Carpinteros, Tapiceros, Herreros, Pintores, Lustradores, Armadores de Cristales y Finiciones
+14;Oficial 2º - Carpinteros, Tapiceros, Herreros, Pintores, Lustradores, Armadores de Cristales y Finiciones
+15;Oficial 1º - Carpinteros, Tapiceros, Herreros, Pintores, Lustradores, Armadores de Cristales y Finiciones
+16;Aprendiz al iniciarse - Gomeros Internos
+17;Aprendiz adelantado - Gomeros Internos
+18;Peón  - Gomeros Internos
+19;Raspador o pelador - Gomeros Internos
+20;Medio Of. Vulcanizador - Gomeros Internos
+21;Oficial Vulcanizador - Gomeros Internos
+22;Medio Oficial de Cámara - Gomeros Internos
+23;Oficial de Cámara - Gomeros Internos
+24;Medio Of. Reparaciones - Gomeros Internos
+25;Oficial Reparaciones - Gomeros Internos
+26;Capataz - Gomeros Internos
+27;Engrasador de Autos - Engrasadores
+28;Engrasador de Omnibus - Engrasadores
+29;Lavador Titular - Lavador de Automóviles en General
+30;Ayudante General para Escalas Nº 5, 6, 7 Menor de 18 años, 6 horas labor - Serenos y Peones
+31;Ayudante general para Escalas 5, 6, 7 Mayor de 18 años - Serenos y Peones
+32;Peón - Serenos y Peones
+33;Sereno exclusivo - Serenos y Peones
+34;Sereno limpiador - Serenos y Peones
+35;Mandadero menor 18 años - Choferes y Mandaderos
+36;Mandadero mayor 18 años - Choferes y Mandaderos
+37;Chofer exclusivo - Choferes y Mandaderos

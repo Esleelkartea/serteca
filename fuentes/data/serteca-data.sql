@@ -1,0 +1,5 @@
+\copy PROVINCIAS FROM 'provincias.txt' WITH DELIMITER ';'
+\copy LOCALIDADES FROM 'localidadesSort.txt' WITH DELIMITER ';'
+\copy FORMAS_PAGO FROM 'formaspago.txt' WITH DELIMITER ';'
+\copy CATEGORIAS FROM 'categorias.txt' WITH DELIMITER ';'
+\copy MARCAS FROM 'marcas.txt' WITH DELIMITER ';'

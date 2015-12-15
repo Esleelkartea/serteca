@@ -1,0 +1,679 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html>
+<head>
+<title>Serteca-HomePage</title>
+
+<link rel="stylesheet" type="text/css" media="all" href="/serteca/css/calendar.css"/>
+<link rel="stylesheet" type="text/css" media="all" href="/serteca/css/administracion.css"/>
+<link rel="stylesheet" type="text/css" media="all" href="/serteca/css/menu.css"/>
+<link rel="stylesheet" type="text/css" media="all" href="/serteca/css/validation.css"/>
+<script src="/serteca/js/utils/prototype.js" type="text/javascript"></script>
+
+<script src="/serteca/js/utils/scriptaculous.js" type="text/javascript"></script>
+<script src='/serteca/js/utils/rico.js' type="text/javascript"></script>
+<script src='/serteca/js/utils/zk_widgets.js' type="text/javascript"></script>
+<script src='/serteca/js/utils/zk_filtros.js' type="text/javascript"></script>
+<script src='/serteca/js/utils/zk_estructura.js' type="text/javascript"></script>
+<script src='/serteca/js/utils/zk_transformadores.js' type="text/javascript"></script>
+<script src='/serteca/js/utils/zk_utils.js' type="text/javascript"></script>
+<script type="text/javascript" src="/serteca/js/utils/zk_editors.js"></script>
+<script type="text/javascript" src="/serteca/js/utils/calendar.js"></script>
+<script type="text/javascript" src="/serteca/js/utils/calendar-setup.js"></script>							
+<script type="text/javascript" src="/serteca/js/utils/calendar-lang/calendar-es.js"></script>
+<script src="/serteca/js/administracion.js" type="text/javascript" CHARSET="ISO-8859-1"></script>
+<script src="/serteca/js/alarmas.js" type="text/javascript" ></script>
+<script src="/serteca/js/utils/validation.js" type="text/javascript" CHARSET="ISO-8859-1"></script>
+<script src="/serteca/js/utils/validation_lang_es.js" type="text/javascript" CHARSET="ISO-8859-1"></script>
+
+<script language="javascript" type="text/javascript">
+
+function verAlarmas()
+{
+ var strAlarmaLinks = 'Clientes con Cobros Pendientes;Reparaciones en Ejecución;Vehículos de Cortesía Libres;Facturas Pendientes de Cobro';
+ var strAlarmaFiltro ="1;2;1;2";
+ var strAlarmaFunctions ="verClientes();verReparaciones();verVehiculoCortesias();verFacturas()";
+ cargarAlarmas(strAlarmaLinks, strAlarmaFiltro, strAlarmaFunctions);
+ }
+
+function verTrabajadores()
+{
+ $('iModoVisualizacion').value = '0';
+ $('viewedRows').value = '20';
+ $('strTotalRegistros').value = '0';
+ $('strGap').value = '0';  
+ $('strTableId').value = 'Trabajadores'; 
+ $('strFunction').value = 'verTrabajadores()';
+ $('strTituloLista').value = 'Lista de Trabajadores';
+ $('strTituloForm').value = 'Trabajador';  
+ $('tableContentServlet').value = '/serteca/Trabajador/TrabajadorTableContentServlet';
+ $('strLinkAddServlet').value = '/serteca/Trabajador/AddTrabajadorServlet';
+ $('strLinkDeleteServlet').value = '/serteca/Trabajador/DeleteTrabajadorServlet'; 
+ $('strLinkEditServlet').value = '/serteca/Trabajador/TrabajadorElementServlet'; 
+ $('strLinkDetallePdfServlet').value = '/serteca/Trabajador/GetTrabajadorDetallePdfServlet';  
+ $('strLinkInformePdfServlet').value = '';   
+ $('strLinkListaPdfServlet').value = '/serteca/Trabajador/TrabajadorTableContentPdfServlet';  
+ $('strLinkEditParam').value = 'trabajadores.ID='; 
+ $('strCampos').value = 'Trabajadores.CIF;Trabajadores.NOMBRE;Trabajadores.APELLIDOS;Trabajadores.TELEFONO;Trabajadores.MOVIL;FREE_EDITAR;FREE_BORRAR'; 
+ $('strTipoEditor').value = 'NORMAL;NORMAL;NORMAL;NORMAL;NORMAL;FREE_EDITAR;FREE_BORRAR'; 
+ $('strCamposDec').value = 'NIF;Nombre;Apellido;Teléfono;Móvil;Editar;Borrar';
+ $('strCamposWidth').value = '12%;24%;24%;12%;12%;8%;8%';
+ $('strLinksUlContentServlet').value = ';;;;;;'; 
+ $('strMetodosController').value = 'CifTrabajadorParsed;NombreTrabajadorParsed;ApellidosTrabajadorParsed;TlfnoTrabajadorParsed;MovilTrabajadorParsed;EditTrabajador;DeleteTrabajador';
+ $('strLinksUpdateServlet').value = '/serteca/Trabajador/UpdateCifServlet;/serteca/Trabajador/UpdateNombreServlet;/serteca/Trabajador/UpdateApellidosServlet;/serteca/Trabajador/UpdateTlfnoServlet;/serteca/Trabajador/UpdateMovilServlet;editar;borrar'; 
+ $('strEsOrdenable').value="1;1;1;1;1;0;0";
+ $('strEventos').value = 'dblclick;dblclick;dblclick;dblclick;dblclick;click;click'; 
+ $('strValidarColumnasGrid').value = 'requerido-es validation-max-10-es;requerido-es;requerido-es;validate-digits-es validation-max-9-es;validate-digits-es validation-max-9-es;;'; 
+ $('strFormCampos').value = 'Trabajadores.ID;Trabajadores.CIF;Trabajadores.NOMBRE;Trabajadores.APELLIDOS;Trabajadores.APELLIDOSDOS;Trabajadores.DIRECCION;Trabajadores.LOCALIDAD_ID;Trabajadores.CP;Trabajadores.TELEFONO;Trabajadores.MOVIL;Trabajadores.EMAIL;Trabajadores.FECHA_ALTA;Trabajadores.FECHA_BAJA;Trabajadores.NUMERO;Trabajadores.CATEGORIA_ID;Trabajadores.COSTEHORA;Trabajadores.OBSERVACION'; 
+ $('strFormCamposOblig').value = '1;1;1;1;;;1;;;;;1;;1;1;;';  
+ $('strFormTipoEditor').value = 'HIDDEN;NORMAL;NORMAL;NORMAL;NORMAL;NORMAL;AUTO;NORMAL;NORMAL;NORMAL;NORMAL;DATE;DATE;NORMAL;AUTO;NORMAL;AREA'; 
+ $('strFormCamposDec').value = 'ID;NIF;Nombre;Apellido1;Apellido2;Dirección;Localidad;CP;Teléfono;Móvil;Email;Fecha-Alta;Fecha-Baja;Numero S.S.;Categoría;Coste/Hora;Observaciones'; 
+ $('strFormCamposWidth').value = ';350px;350px;350px;350px;350px;400px;350px;350px;350px;350px;350px;350px;350px;400px;350px;700px';  
+ $('strFormLinksUlContentServlet').value = ';;;;;;/serteca/Localidad/LocalidadUlContentServlet;;;;;;;;/serteca/Categoria/CategoriaUlContentServlet;;'; 
+ $('strFormLinksElementServlet').value = ';;;;;;/serteca/Trabajador/TrabajadorLocalidadIdServlet;;;;;;;;/serteca/Trabajador/TrabajadorCategoriaServlet;;';
+ $('strFormMetodosController').value = 'Id;CifTrabajadorParsed;NombreTrabajadorParsed;ApellidosTrabajadorParsed;ApellidosDosTrabajadorParsed;DireccionTrabajadorParsed;LocalidadIdTrabajadorParsed;CpTrabajadorParsed;TlfnoTrabajadorParsed;MovilTrabajadorParsed;EmailTrabajadorParsed;FechaAltaTrabajadorParsed;FechaBajaTrabajadorParsed;NumeroTrabajadorParsed;CategoriaIdTrabajadorParsed;CosteHoraTrabajadorParsed;ObsTrabajadorParsed';  
+ $('strValidarCamposForm').value=';requerido-es validation-max-10-es;requerido-es ;requerido-es;;;;;validate-digits-es validation-max-9-es;validate-digits-es validation-max-9-es;validate-email-es;requerido-es validate-date-separador-es;validate-date-separador-es;requerido-es validate-digits-es validation-max-12-es;;validate-number-es;';  
+ $('strFormCabeceraLinks').value = 'Órdenes de Trabajo';
+ $('strFormCabeceraFunctions').value = 'verOrdenesTrabajo()';  
+ $('strCabeceraLinks').value = '';
+ $('strCabeceraFunctions').value = '';  
+ $('strFiltroLinks').value = 'Todos;Activos;Baja';
+ $('strFiltroFunctions').value = '0;1;2'; 
+ $('strSeparadorHora').value =":";
+ cargaQueryGrid();
+ cargaGrid();
+ crear();
+ }
+
+function verMarcas()
+{
+ $('iModoVisualizacion').value = '1';
+ $('viewedRows').value = '10';
+ $('strTotalRegistros').value = '0';
+ $('strGap').value = '0';
+ $('strTableId').value = 'Marcas'; 
+ $('strFunction').value = 'verMarcas()';
+ $('strTituloLista').value = 'Lista de Marcas';
+ $('strTituloForm').value = 'Marca';  
+ $('tableContentServlet').value = '/serteca/Marca/MarcaTableContentServlet'; 
+ $('strLinkAddServlet').value = '/serteca/Marca/AddMarcaServlet'; 
+ $('strLinkDeleteServlet').value = '/serteca/Marca/DeleteMarcaServlet';
+ $('strLinkEditServlet').value = '/serteca/Marca/MarcaElementServlet'; 
+ $('strLinkDetallePdfServlet').value = '/serteca/Marca/GetMarcaDetallePdfServlet'; 
+ $('strLinkInformePdfServlet').value = '';  
+ $('strLinkListaPdfServlet').value = '/serteca/Marca/MarcaTableContentPdfServlet';  
+ $('strLinkEditParam').value = 'marcas.ID=';  
+ $('strCampos').value = 'Marcas.NOMBRE;FREE_EDITAR;FREE_BORRAR';
+ $('strTipoEditor').value = 'NORMAL;FREE_EDITAR;FREE_BORRAR'; 
+ $('strCamposDec').value = 'Nombre;Editar;Borrar';
+ $('strCamposWidth').value = '90%;5%;5%';
+ $('strLinksUlContentServlet').value = ';;';   
+ $('strMetodosController').value = 'NombreMarcaParsed;EditMarca;DeleteMarca';
+ $('strLinksUpdateServlet').value = '/serteca/Marca/UpdateNombreServlet;editar;borrar'; 
+ $('strEsOrdenable').value="1;0;0";
+ $('strEventos').value = 'dblclick;click;click'; 
+ $('strValidarColumnasGrid').value = 'requerido-es;;'; 
+ $('strFormCampos').value = 'Marcas.ID;Marcas.NOMBRE';
+ $('strFormCamposOblig').value = '1;1'; 
+ $('strFormTipoEditor').value = 'HIDDEN;NORMAL'; 
+ $('strFormCamposDec').value = 'ID;Nombre';
+ $('strFormCamposWidth').value = ';550px';   
+ $('strFormLinksUlContentServlet').value = ';';  
+ $('strFormLinksElementServlet').value = ';';  
+ $('strFormMetodosController').value = 'Id;NombreMarcaParsed'; 
+ $('strValidarCamposForm').value=';requerido-es';  
+ $('strFormCabeceraLinks').value = 'Modelos';
+ $('strFormCabeceraFunctions').value = 'verModelos()';  
+ $('strCabeceraLinks').value = '';
+ $('strCabeceraFunctions').value = '';  
+ $('strFiltroLinks').value = '';
+ $('strFiltroFunctions').value = '';  
+ $('strSeparadorHora').value =":";
+ cargaQueryGrid();
+ cargaGrid();
+ crear();  
+}
+
+function verModelos()
+{
+ $('iModoVisualizacion').value = '1';
+ $('viewedRows').value = '10';
+ $('strTotalRegistros').value = '0';
+ $('strGap').value = '0';
+ $('strTableId').value = 'Modelos'; 
+ $('strFunction').value = 'verModelos()';
+ $('strTituloLista').value = 'Lista de Modelos';
+ $('strTituloForm').value = 'Modelo';  
+ $('tableContentServlet').value = '/serteca/Modelo/ModeloTableContentServlet'; 
+ $('strLinkAddServlet').value = '/serteca/Modelo/AddModeloServlet'; 
+ $('strLinkDeleteServlet').value = '/serteca/Modelo/DeleteModeloServlet';
+ $('strLinkEditServlet').value = '/serteca/Modelo/ModeloElementServlet'; 
+ $('strLinkDetallePdfServlet').value = '/serteca/Modelo/GetModeloDetallePdfServlet'; 
+ $('strLinkInformePdfServlet').value = '';  
+ $('strLinkListaPdfServlet').value = '/serteca/Modelo/ModeloTableContentPdfServlet';   
+ $('strLinkEditParam').value = 'modelos.ID=';  
+ $('strCampos').value = 'Modelos.NOMBRE;Modelos.MARCA_ID;FREE_EDITAR;FREE_BORRAR';
+ $('strTipoEditor').value = 'NORMAL;AUTO;FREE_EDITAR;FREE_BORRAR'; 
+ $('strCamposDec').value = 'Nombre;Marca;Editar;Borrar';
+ $('strCamposWidth').value = '45%;45%;5%;5%';
+ $('strLinksUlContentServlet').value = ';/serteca/Marca/MarcaUlContentServlet;;';   
+ $('strMetodosController').value = 'NombreModeloParsed;MarcaIdModeloParsed;EditModelo;DeleteModelo';
+ $('strLinksUpdateServlet').value = '/serteca/Modelo/UpdateNombreServlet;/serteca/Modelo/UpdateMarcaIdServlet;editar;borrar'; 
+ $('strEsOrdenable').value="1;1;0;0";
+ $('strEventos').value = 'dblclick;dblclick;click;click'; 
+ $('strValidarColumnasGrid').value = 'requerido-es;;;'; 
+ $('strFormCampos').value = 'Modelos.ID;Modelos.NOMBRE;Modelos.MARCA_ID';
+ $('strFormCamposOblig').value = '1;1;1'; 
+ $('strFormTipoEditor').value = 'HIDDEN;NORMAL;AUTO'; 
+ $('strFormCamposDec').value = 'ID;Nombre;Marca';
+ $('strFormCamposWidth').value = ';400px;350px';   
+ $('strFormLinksUlContentServlet').value = ';;/serteca/Marca/MarcaUlContentServlet';  
+ $('strFormLinksElementServlet').value = ';;/serteca/Modelo/ModeloMarcaServlet';  
+ $('strFormMetodosController').value = 'Id;NombreModeloParsed;MarcaIdModeloParsed';
+ $('strValidarCamposForm').value=';requerido-es;';  
+ $('strFormCabeceraLinks').value = 'Vehículos de Cortesía;Vehiculos';
+ $('strFormCabeceraFunctions').value = 'verVehiculoCortesias();verVehiculos()';  
+ $('strCabeceraLinks').value = 'Marcas';
+ $('strCabeceraFunctions').value = 'verMarcas()';  
+ $('strFiltroLinks').value = '';
+ $('strFiltroFunctions').value = '';  
+ $('strSeparadorHora').value =":";
+ cargaQueryGrid();
+ cargaGrid();
+ crear();  
+}
+
+function verClientes()
+{
+ $('iModoVisualizacion').value = '0';
+ $('viewedRows').value = '5';
+ $('strTotalRegistros').value = '0';
+ $('strGap').value = '0';
+ $('strTableId').value = 'Clientes'; 
+ $('strFunction').value = 'verClientes()';
+ $('strTituloLista').value = 'Lista de Clientes';
+ $('strTituloForm').value = 'Cliente';  
+ $('tableContentServlet').value = '/serteca/Cliente/ClienteTableContentServlet';
+ $('strLinkAddServlet').value = '/serteca/Cliente/AddClienteServlet';
+ $('strLinkDeleteServlet').value = '/serteca/Cliente/DeleteClienteServlet';
+ $('strLinkEditServlet').value = '/serteca/Cliente/ClienteElementServlet';  
+ $('strLinkDetallePdfServlet').value = '/serteca/Cliente/GetClienteDetallePdfServlet'; 
+ $('strLinkInformePdfServlet').value = '';  
+ $('strLinkListaPdfServlet').value = '/serteca/Cliente/ClienteTableContentPdfServlet'; 
+ $('strLinkEditParam').value = 'clientes.ID='; 
+ $('strCampos').value = 'Clientes.NIF;Clientes.NOMBRE;Clientes.NOMBRECOMERCIAL;Clientes.DIRECCION;Clientes.TELEFONO;Clientes.MOVIL;FREE_EDITAR;FREE_BORRAR'; 
+ $('strTipoEditor').value = 'NORMAL;NORMAL;NORMAL;NORMAL;NORMAL;NORMAL;FREE_EDITAR;FREE_BORRAR';
+ $('strCamposDec').value = 'CIF;Nombre;Nombre Comercial;Dirección;Teléfono;Móvil;Editar;Borrar'; 
+ $('strCamposWidth').value = '10%;20%;20%;20%;10%;10%;5%;5%'; 
+ $('strLinksUlContentServlet').value = ';;;;;;;';
+ $('strMetodosController').value = 'NifClienteParsed;NombreClienteParsed;NombreComercialClienteParsed;DireccionClienteParsed;TlfnoClienteParsed;MovilClienteParsed;EditCliente;DeleteCliente';
+ $('strLinksUpdateServlet').value = '/serteca/Cliente/UpdateNifServlet;/serteca/Cliente/UpdateNombreServlet;/serteca/Cliente/UpdateNombreComercialServlet;/serteca/Cliente/UpdateDireccionServlet;/serteca/Cliente/UpdateTlfnoServlet;/serteca/Cliente/UpdateMovilServlet;editar;borrar';   
+ $('strEsOrdenable').value="1;1;1;1;1;1;0;0";
+ $('strEventos').value = 'dblclick;dblclick;dblclick;dblclick;dblclick;dblclick;click;click'; 
+ $('strValidarColumnasGrid').value = 'requerido-es;requerido-es;;;validate-digits-es validation-max-9-es;validate-digits-es validation-max-9-es;;'; 
+ $('strFormCampos').value = 'Clientes.ID;Clientes.NIF;Clientes.NOMBRE;Clientes.NOMBRECOMERCIAL;Clientes.RAZONSOCIAL;Clientes.LOCALIDAD_ID;Clientes.DIRECCION;Clientes.CP;Clientes.TELEFONO;Clientes.MOVIL;Clientes.FAX;Clientes.EMAIL;Clientes.FORMA_PAGO_ID;Clientes.NUMERO_CUENTA;Clientes.DTO_PRONTO_PAGO;Clientes.DIA_PAGO;Clientes.OBSERVACION;ImportePendiente;ImporteCobrado'; 
+ $('strFormCamposOblig').value = '1;1;1;;;1;;;;;;;1;;;;;1;1';  
+ $('strFormTipoEditor').value = 'HIDDEN;NORMAL;NORMAL;NORMAL;NORMAL;AUTO;NORMAL;NORMAL;NORMAL;NORMAL;NORMAL;NORMAL;AUTO;NORMAL;NORMAL;NORMAL;AREA;LECTURA;LECTURA'; 
+ $('strFormCamposDec').value = 'ID;NIF;Nombre;Nombre Comercial;Razón Social;Localidad;Direccion;CP;Telefono;Móvil;Fax;E-mail;Forma de Pago;Numero Cuenta;Dto. Pronto Pago;Dia de Pago;Observaciones;Total Pendiente de Cobro;Total Cobrado'; 
+ $('strFormCamposWidth').value = ';350px;350px;350px;350px;400px;300px;350px;350px;350px;350px;350px;400px;350px;350px;350px;700px;350px;350px';    
+ $('strFormLinksUlContentServlet').value =';;;;;/serteca/Localidad/LocalidadUlContentServlet;;;;;;;/serteca/FormaPago/FormaPagoUlContentServlet;;;;';
+ $('strFormLinksElementServlet').value = ';;;;;/serteca/Cliente/ClienteLocalidadServlet;;;;;;;/serteca/Cliente/ClienteFormaPagoServlet;;;;';
+ $('strFormMetodosController').value = 'Id;NifClienteParsed;NombreClienteParsed;NombreComercialClienteParsed;RazonSocialClienteParsed;LocalidadIdClienteParsed;DireccionClienteParsed;CpClienteParsed;TlfnoClienteParsed;MovilClienteParsed;FaxClienteParsed;EmailClienteParsed;FormaPagoIdClienteParsed;NumeroCuentaClienteParsed;DtoProntoPagoClienteParsed;DiaPagoClienteParsed;ObsClienteParsed;ImportePendienteClienteParsed;ImporteCobradoClienteParsed'; 
+ $('strValidarCamposForm').value=';requerido-es;requerido-es;;;;;;validate-digits-es validation-max-9-es;validate-digits-es validation-max-9-es;validate-digits-es validation-max-9-es;validate-email-es;;;;;;;';   
+ $('strFormCabeceraLinks').value = 'Vehículos;Facturas';
+ $('strFormCabeceraFunctions').value = 'verVehiculos();verFacturas()';
+ $('strCabeceraLinks').value = '';
+ $('strCabeceraFunctions').value = '';   
+ $('strFiltroLinks').value = 'Todos;Impagados';
+ $('strFiltroFunctions').value = '0;1';
+ $('strSeparadorHora').value =":";
+ cargaQueryGrid();
+ cargaGrid();
+ crear(); 
+}
+
+function verVehiculoCortesias()
+{
+ $('iModoVisualizacion').value = '1';
+ $('viewedRows').value = '5';
+ $('strTotalRegistros').value = '0';
+ $('strGap').value = '0';
+ $('strTableId').value = 'Vehiculos_Cortesia'; 
+ $('strFunction').value = 'verVehiculoCortesias()';
+ $('strTituloLista').value = 'Lista de Vehículos de Cortesía';
+ $('strTituloForm').value = 'Vehículo de Cortesía';  
+ $('tableContentServlet').value = '/serteca/VehiculoCortesia/VehiculoCortesiaTableContentServlet';
+ $('strLinkAddServlet').value = '/serteca/VehiculoCortesia/AddVehiculoCortesiaServlet';
+ $('strLinkDeleteServlet').value = '/serteca/VehiculoCortesia/DeleteVehiculoCortesiaServlet';
+ $('strLinkEditServlet').value = '/serteca/VehiculoCortesia/VehiculoCortesiaElementServlet';  
+ $('strLinkDetallePdfServlet').value = '/serteca/VehiculoCortesia/GetVehiculoCortesiaDetallePdfServlet'; 
+ $('strLinkInformePdfServlet').value = '';  
+ $('strLinkListaPdfServlet').value = '/serteca/VehiculoCortesia/VehiculoCortesiaTableContentPdfServlet';  
+ $('strLinkEditParam').value = 'vehiculos_cortesia.ID=';  
+ $('strCampos').value = 'Vehiculos_Cortesia.VERSION;Vehiculos_Cortesia.MATRICULA;Vehiculos_Cortesia.MODELO_ID;Vehiculos_Cortesia.COLOR;Vehiculos_Cortesia.OBSERVACION;FREE_EDITAR;FREE_BORRAR'; 
+ $('strTipoEditor').value = 'NORMAL;NORMAL;AUTO;NORMAL;AREA;FREE_EDITAR;FREE_BORRAR'; 
+ $('strCamposDec').value = 'Versión;Matrícula;Modelo;Color;Observaciones;Editar;Borrar'; 
+ $('strCamposWidth').value = '15%;15%;15%;15%;30%;5%;5%'; 
+ $('strLinksUlContentServlet').value = ';;/serteca/Modelo/ModeloUlContentServlet;;;;';
+ $('strMetodosController').value = 'VersionVehiculoCortesiaParsed;MatriculaVehiculoCortesiaParsed;ModeloIdVehiculoCortesiaParsed;ColorVehiculoCortesiaParsed;ObsVehiculoCortesiaParsed;EditVehiculoCortesia;DeleteVehiculoCortesia';
+ $('strLinksUpdateServlet').value = '/serteca/VehiculoCortesia/UpdateVersionServlet;/serteca/VehiculoCortesia/UpdateMatriculaServlet;/serteca/VehiculoCortesia/UpdateModeloIdServlet;/serteca/VehiculoCortesia/UpdateColorServlet;/serteca/VehiculoCortesia/UpdateObsServlet;editar;borrar';   
+ $('strEsOrdenable').value="1;1;1;1;1;0;0";
+ $('strEventos').value = 'dblclick;dblclick;dblclick;dblclick;dblclick;click;click'; 
+ $('strValidarColumnasGrid').value = ';requerido-es;requerido-es;;;;'; 
+ $('strFormCampos').value = 'Vehiculos_Cortesia.ID;Vehiculos_Cortesia.VERSION;Vehiculos_Cortesia.MATRICULA;Vehiculos_Cortesia.MODELO_ID;Vehiculos_Cortesia.CHASIS_ID;Vehiculos_Cortesia.COLOR;Vehiculos_Cortesia.OBSERVACION'; 
+ $('strFormCamposOblig').value = '1;;1;1;1;;'; 
+ $('strFormTipoEditor').value = 'HIDDEN;NORMAL;NORMAL;AUTO;NORMAL;NORMAL;AREA'; 
+ $('strFormCamposDec').value = 'ID;Versión;Matrícula;Modelo;Chasis;Color;Observaciones';   
+ $('strFormCamposWidth').value = ';350px;350px;400px;300px;350px;700px';  
+ $('strFormLinksUlContentServlet').value = ';;;/serteca/Modelo/ModeloUlContentServlet;;;';
+ $('strFormLinksElementServlet').value = ';;;/serteca/VehiculoCortesia/VehiculoCortesiaModeloServlet;;;';  
+ $('strFormMetodosController').value = 'Id;VersionVehiculoCortesiaParsed;MatriculaVehiculoCortesiaParsed;ModeloIdVehiculoCortesiaParsed;ChasisIdVehiculoCortesiaParsed;ColorVehiculoCortesiaParsed;ObsVehiculoCortesiaParsed';
+ $('strValidarCamposForm').value=';;requerido-es;requerido-es;requerido-es;;';   
+ $('strFormCabeceraLinks').value = 'Préstamos';
+ $('strFormCabeceraFunctions').value = 'verPrestamos()';  
+ $('strCabeceraLinks').value = 'Modelos';
+ $('strCabeceraFunctions').value = 'verModelos()';  
+ $('strFiltroLinks').value = 'Todos;Libres;No Disponibles';
+ $('strFiltroFunctions').value ='0;1;2';
+ $('strSeparadorHora').value =":";
+ cargaQueryGrid();
+ cargaGrid();
+ crear(); 
+}
+
+function verPrestamos()
+{
+ $('iModoVisualizacion').value = '1';
+ $('viewedRows').value = '10';
+ $('strTotalRegistros').value = '0';
+ $('strGap').value = '0';
+ $('strTableId').value = 'Prestamos';  
+ $('strFunction').value = 'verPrestamos()';
+ $('strTituloLista').value = 'Lista de Préstamos';
+ $('strTituloForm').value = 'Préstamo';  
+ $('tableContentServlet').value = '/serteca/Prestamo/PrestamoTableContentServlet';
+ $('strLinkAddServlet').value = '/serteca/Prestamo/AddPrestamoServlet';
+ $('strLinkDeleteServlet').value = '/serteca/Prestamo/DeletePrestamoServlet';
+ $('strLinkEditServlet').value = '/serteca/Prestamo/PrestamoElementServlet';  
+ $('strLinkDetallePdfServlet').value = '/serteca/Prestamo/GetPrestamoDetallePdfServlet'; 
+ $('strLinkInformePdfServlet').value = '/serteca/Prestamo/GetPrestamoInformePdfServlet';  
+ $('strLinkListaPdfServlet').value = '/serteca/Prestamo/PrestamoTableContentPdfServlet';    
+ $('strLinkEditParam').value = 'prestamos.ID=';  
+ $('strCampos').value = 'Prestamos.VEHICULO_CORTESIA_ID;Prestamos.REPARACION_ID;Prestamos.FECHA_INI;Prestamos.FECHA_FIN;FREE_EDITAR;FREE_BORRAR'; 
+ $('strTipoEditor').value = 'AUTO;AUTO;DATE;DATE;FREE_EDITAR;FREE_BORRAR'; 
+ $('strCamposDec').value = 'Vehículo de Cortesía;Reparación;Fecha Inicio;Fecha Fin;Editar;Borrar'; 
+ $('strCamposWidth').value = '30%;30%;15%;15%;5%;5%'; 
+ $('strLinksUlContentServlet').value = '/serteca/VehiculoCortesia/VehiculoCortesiaUlContentServlet;/serteca/Reparacion/ReparacionUlContentServlet;;;;';
+ $('strMetodosController').value = 'VehiculoCortesiaIdPrestamoParsed;ReparacionIdPrestamoParsed;FechaIniPrestamoParsed;FechaFinPrestamoParsed;EditPrestamo;DeletePrestamo';
+ $('strLinksUpdateServlet').value = '/serteca/Prestamo/UpdateVehiculoCortesiaIdServlet;/serteca/Prestamo/UpdateReparacionIdServlet;/serteca/Prestamo/UpdateFechaIniServlet;/serteca/Prestamo/UpdateFechaFinServlet;editar;borrar';   
+ $('strEsOrdenable').value="1;1;1;1;0;0"; 
+ $('strEventos').value = 'dblclick;dblclick;dblclick;dblclick;click;click';
+ $('strValidarColumnasGrid').value = 'requerido-es;requerido-es;requerido-es validate-date-separador-es;;;'; 
+ $('strFormCampos').value = 'Prestamos.ID;Prestamos.VEHICULO_CORTESIA_ID;Prestamos.REPARACION_ID;Prestamos.FECHA_INI;Prestamos.HORA_INI;Prestamos.FECHA_FIN;Prestamos.HORA_FIN'; 
+ $('strFormCamposOblig').value = '1;1;1;1;;;'; 
+ $('strFormTipoEditor').value = 'HIDDEN;AUTO;AUTO;DATE;NORMAL;DATE;NORMAL'; 
+ $('strFormCamposDec').value = 'ID;Vehículo de Cortesía;Reparación;Fecha Inicio;Hora Inicio;Fecha Fin;Hora Fin';   
+ $('strFormCamposWidth').value = ';400px;350px;350px;350px;350px;350px';  
+ $('strFormLinksUlContentServlet').value = ';/serteca/VehiculoCortesia/VehiculoCortesiaUlContentServlet;/serteca/Reparacion/ReparacionUlContentServlet;;';
+ $('strFormLinksElementServlet').value = ';/serteca/Prestamo/PrestamoVehiculoCortesiaServlet;/serteca/Prestamo/PrestamoReparacionServlet;;';  
+ $('strFormMetodosController').value = 'Id;VehiculoCortesiaIdPrestamoParsed;ReparacionIdPrestamoParsed;FechaIniPrestamoParsed;HoraIniPrestamoParsed;FechaFinPrestamoParsed;HoraFinPrestamoParsed';
+ $('strValidarCamposForm').value= ';requerido-es;requerido-es;requerido-es validate-date-separador-es;;validate-date-separador-es;';  
+ $('strFormCabeceraLinks').value = '';
+ $('strFormCabeceraFunctions').value = '';  
+ $('strCabeceraLinks').value = 'Reparaciones;Vehículos de Cortesía';
+ $('strCabeceraFunctions').value = 'verReparaciones();verVehiculoCortesias()';  
+ $('strFiltroLinks').value = '';
+ $('strFiltroFunctions').value = '';   
+ $('strSeparadorHora').value =":";
+ cargaQueryGrid();
+ cargaGrid();
+ crear(); 
+}
+
+function verVehiculos()
+{
+ $('iModoVisualizacion').value = '1';
+ $('viewedRows').value = '5';
+ $('strTotalRegistros').value = '0';
+ $('strGap').value = '0';
+ $('strTableId').value = 'Vehiculos';   
+ $('strFunction').value = 'verVehiculos()';
+ $('strTituloLista').value = 'Lista de Vehículos';
+ $('strTituloForm').value = 'Vehículo'; 
+ $('tableContentServlet').value = '/serteca/Vehiculo/VehiculoTableContentServlet';
+ $('strLinkAddServlet').value = '/serteca/Vehiculo/AddVehiculoServlet';
+ $('strLinkDeleteServlet').value = '/serteca/Vehiculo/DeleteVehiculoServlet';
+ $('strLinkEditServlet').value = '/serteca/Vehiculo/VehiculoElementServlet';  
+ $('strLinkDetallePdfServlet').value = '/serteca/Vehiculo/GetVehiculoDetallePdfServlet';
+ $('strLinkInformePdfServlet').value = '';  
+ $('strLinkListaPdfServlet').value = '/serteca/Vehiculo/VehiculoTableContentPdfServlet';  
+ $('strLinkEditParam').value = 'vehiculos.ID=';  
+ $('strCampos').value = 'Vehiculos.MATRICULA;Vehiculos.CLIENTE_ID;Vehiculos.MODELO_ID;Vehiculos.COLOR;Vehiculos.CHASIS_ID;Vehiculos.FECHA_MATRICULACION;Vehiculos.MOTOR_ID;FREE_EDITAR;FREE_BORRAR'; 
+ $('strTipoEditor').value = 'NORMAL;AUTO;AUTO;NORMAL;NORMAL;DATE;NORMAL;FREE_EDITAR;FREE_BORRAR'; 
+ $('strCamposDec').value = 'Matrícula;Cliente;Modelo;Color;Chasis;Fecha;Motor;Editar;Borrar'; 
+ $('strCamposWidth').value = '10%;20%;20%;10%;10%;10%;10%;5%;5%'; 
+ $('strLinksUlContentServlet').value = ';/serteca/Cliente/ClienteUlContentServlet;/serteca/Modelo/ModeloUlContentServlet;;;;;;';
+ $('strMetodosController').value = 'MatriculaVehiculoParsed;ClienteIdVehiculoParsed;ModeloIdVehiculoParsed;ColorVehiculoParsed;ChasisIdVehiculoParsed;FechaMatriculacionVehiculoParsed;MotorIdVehiculoParsed;EditVehiculo;DeleteVehiculo';
+ $('strLinksUpdateServlet').value = '/serteca/Vehiculo/UpdateMatriculaServlet;/serteca/Vehiculo/UpdateClienteIdServlet;/serteca/Vehiculo/UpdateModeloIdServlet;/serteca/Vehiculo/UpdateColorServlet;/serteca/Vehiculo/UpdateChasisIdServlet;/serteca/Vehiculo/UpdateFechaMatriculacionServlet;/serteca/Vehiculo/UpdateMotorIdServlet;editar;borrar';   
+ $('strEsOrdenable').value="1;1;1;1;1;1;1;0;0";
+ $('strEventos').value = 'dblclick;dblclick;dblclick;dblclick;dblclick;dblclick;dblclick;click;click'; 
+ $('strValidarColumnasGrid').value = 'requerido-es;requerido-es;;;requerido-es;requerido-es validate-date-separador-es;;;';  
+ $('strFormCampos').value = 'Vehiculos.ID;Vehiculos.VERSION;Vehiculos.MATRICULA;Vehiculos.CLIENTE_ID;Vehiculos.MODELO_ID;Vehiculos.COLOR;Vehiculos.MOTOR_ID;Vehiculos.OBSERVACION;Vehiculos.CHASIS_ID;Vehiculos.FECHA_MATRICULACION;Vehiculos.FECHA_REVISION'; 
+ $('strFormCamposOblig').value = '1;;1;1;1;;;;1;1;'; 
+ $('strFormTipoEditor').value = 'HIDDEN;NORMAL;NORMAL;AUTO;AUTO;NORMAL;NORMAL;AREA;NORMAL;DATE;DATE'; 
+ $('strFormCamposDec').value = 'ID;Versión;Matrícula;Cliente;Modelo;Color;Motor;Observaciones;Chasis;Matriculación;Próxima Revisión';   
+ $('strFormCamposWidth').value = ';250px;300px;350px;300px;250px;300px;600px;250px;250px;250px';  
+ $('strFormLinksUlContentServlet').value = ';;;/serteca/Cliente/ClienteUlContentServlet;/serteca/Modelo/ModeloUlContentServlet;;;;;;';
+ $('strFormLinksElementServlet').value = ';;;/serteca/Vehiculo/VehiculoClienteServlet;/serteca/Vehiculo/VehiculoModeloServlet;;;;;;';  
+ $('strFormMetodosController').value = 'Id;VersionVehiculoParsed;MatriculaVehiculoParsed;ClienteIdVehiculoParsed;ModeloIdVehiculoParsed;ColorVehiculoParsed;MotorIdVehiculoParsed;ObsVehiculoParsed;ChasisIdVehiculoParsed;FechaMatriculacionVehiculoParsed;FechaRevisionVehiculoParsed';
+ $('strValidarCamposForm').value= 'requerido-es;;requerido-es;requerido-es;;;;;requerido-es;requerido-es validate-date-separador-es;;';  
+ $('strFormCabeceraLinks').value = 'Reparaciones';
+ $('strFormCabeceraFunctions').value = 'verReparaciones()'; 
+ $('strCabeceraLinks').value = 'Clientes;Modelos';
+ $('strCabeceraFunctions').value = 'verClientes();verModelos()';   
+ $('strFiltroLinks').value = '';
+ $('strFiltroFunctions').value = '';   
+ $('strSeparadorHora').value =":";
+ cargaQueryGrid();
+ cargaGrid();
+ crear(); 
+}
+
+function verReparaciones()
+{
+ $('iModoVisualizacion').value = '0';
+ $('viewedRows').value = '20';
+ $('strTotalRegistros').value = '0';
+ $('strGap').value = '0'; 
+ $('strTableId').value = 'Reparaciones';   
+ $('strFunction').value = 'verReparaciones()';
+ $('strTituloLista').value = 'Lista de Reparaciones';
+ $('strTituloForm').value = 'Reparación'; 
+ $('tableContentServlet').value = '/serteca/Reparacion/ReparacionTableContentServlet';
+ $('strLinkAddServlet').value = '/serteca/Reparacion/AddReparacionServlet';
+ $('strLinkDeleteServlet').value = '/serteca/Reparacion/DeleteReparacionServlet';
+ $('strLinkEditServlet').value = '/serteca/Reparacion/ReparacionElementServlet';
+ $('strLinkDetallePdfServlet').value = '/serteca/Reparacion/GetReparacionDetallePdfServlet';  
+ $('strLinkInformePdfServlet').value = '/serteca/Reparacion/GetReparacionInformePdfServlet';  
+ $('strLinkListaPdfServlet').value = '/serteca/Reparacion/ReparacionTableContentPdfServlet';   
+ $('strLinkEditParam').value = 'reparaciones.ID=';  
+ $('strCampos').value = 'Reparaciones.VEHICULO_ID;Reparaciones.FECHA_ENTRADA;Reparaciones.FECHA_SALIDA;Reparaciones.RESPONSABLE;Reparaciones.ESTADO;Reparaciones.KM;Reparaciones.IMPORTE;FREE_EDITAR;FREE_BORRAR'; 
+ $('strTipoEditor').value = 'AUTO;DATE;DATE;NORMAL;;NORMAL;NORMAL;FREE_EDITAR;FREE_BORRAR'; 
+ $('strCamposDec').value = 'Vehículo;Entrada;Salida;Responsable;Estado;Km;Importe;Editar;Borrar'; 
+ $('strCamposWidth').value = '20%;10%;10%;20%;10%;10%;10%;5%;5%'; 
+ $('strLinksUlContentServlet').value = '/serteca/Vehiculo/VehiculoUlContentServlet;;;;;;;;';
+ $('strMetodosController').value = 'VehiculoIdReparacionParsed;FechaEntradaReparacionParsed;FechaSalidaReparacionParsed;ResponsableReparacionParsed;EstadoReparacionParsed;KmReparacionParsed;ImporteReparacionParsed;EditReparacion;DeleteReparacion';
+ $('strLinksUpdateServlet').value = '/serteca/Reparacion/UpdateVehiculoIdServlet;/serteca/Reparacion/UpdateFechaEntradaServlet;/serteca/Reparacion/UpdateFechaSalidaServlet;/serteca/Reparacion/UpdateResponsableServlet;/serteca/Reparacion/UpdateEstadoServlet;/serteca/Reparacion/UpdateKmServlet;/serteca/Reparacion/UpdateImporteServlet;editar;borrar';   
+ $('strEsOrdenable').value="1;1;1;1;1;1;1;0;0";
+ $('strEventos').value = 'dblclick;dblclick;dblclick;dblclick;dblclick;dblclick;dblclick;click;click'; 
+ $('strValidarColumnasGrid').value = 'requerido-es;requerido-es validate-date-separador-es;validate-date-separador-es;;;validate-number-es;validate-number-es;;';  
+ $('strFormCampos').value = 'Reparaciones.ID;Reparaciones.VEHICULO_ID;Reparaciones.FECHA_ENTRADA;Reparaciones.FECHA_SALIDA;Reparaciones.RESPONSABLE;Reparaciones.DEPOSITO;Reparaciones.KM;Reparaciones.IMPORTE;Reparaciones.OBSERVACION;Reparaciones.ESTADOPREVIO;Reparaciones.ESTADO'; 
+ $('strFormCamposOblig').value = '1;1;1;;;;;;;;'; 
+ $('strFormTipoEditor').value = 'HIDDEN;AUTO;DATE;DATE;NORMAL;NORMAL;NORMAL;NORMAL;AREA;AREA;LECTURA'; 
+ $('strFormCamposDec').value = 'ID;Vehículo;Fecha Entrada; Fecha Salida;Responsable;Depósito;Km;Importe;Observaciones;Estado Previo;Estado';   
+ $('strFormCamposWidth').value = ';400px;300px;350px;350px;350px;350px;350px;700px;700px;700px';  
+ $('strFormLinksUlContentServlet').value = ';/serteca/Vehiculo/VehiculoUlContentServlet;;;;;;;';
+ $('strFormLinksElementServlet').value = ';/serteca/Reparacion/ReparacionVehiculoServlet;;;;;;;';  
+ $('strFormMetodosController').value = 'Id;VehiculoIdReparacionParsed;FechaEntradaReparacionParsed;FechaSalidaReparacionParsed;ResponsableReparacionParsed;DepositoReparacionParsed;KmReparacionParsed;ImporteReparacionParsed;ObsReparacionParsed;EstadoPrevioReparacionParsed;EstadoReparacionParsed';
+ $('strValidarCamposForm').value= 'requerido-es;requerido-es;requerido-es validate-date-separador-es;validate-date-separador-es;;;validate-number-es;validate-number-es;;;';  
+ $('strFormCabeceraLinks').value = 'Ordenes de Trabajo;Facturas';
+ $('strFormCabeceraFunctions').value = 'verOrdenesTrabajo();verFacturas()'; 
+ $('strCabeceraLinks').value = 'Vehículos;Préstamos';
+ $('strCabeceraFunctions').value = 'verVehiculos();verPrestamos()';   
+ $('strFiltroLinks').value = 'Todas;Abiertas;En Ejecución;Finalizadas';
+ $('strFiltroFunctions').value = '0;1;2;3';  
+ $('strSeparadorHora').value =":";
+ cargaQueryGrid();
+ cargaGrid();
+ crear(); 
+}
+
+function verOrdenesTrabajo()
+{
+ $('iModoVisualizacion').value = '0';
+ $('viewedRows').value = '20';
+ $('strTotalRegistros').value = '0';
+ $('strGap').value = '0';
+ $('strTableId').value = 'Ordenes_Trabajo';  
+ $('strFunction').value = 'verOrdenesTrabajo()';
+ $('strTituloLista').value = 'Lista de Órdenes de Trabajo';
+ $('strTituloForm').value = 'Órden de Trabajo'; 
+ $('tableContentServlet').value = '/serteca/OrdenTrabajo/OrdenTrabajoTableContentServlet';
+ $('strLinkAddServlet').value = '/serteca/OrdenTrabajo/AddOrdenTrabajoServlet';
+ $('strLinkDeleteServlet').value = '/serteca/OrdenTrabajo/DeleteOrdenTrabajoServlet';
+ $('strLinkEditServlet').value = '/serteca/OrdenTrabajo/OrdenTrabajoElementServlet'; 
+ $('strLinkDetallePdfServlet').value = '/serteca/OrdenTrabajo/GetOrdenTrabajoDetallePdfServlet'; 
+ $('strLinkInformePdfServlet').value = '';  
+ $('strLinkListaPdfServlet').value = '/serteca/OrdenTrabajo/OrdenTrabajoTableContentPdfServlet';  
+ $('strLinkEditParam').value = 'ordenestrabajo.ID=';  
+ $('strCampos').value = 'Ordenes_Trabajo.REPARACION_ID;Ordenes_Trabajo.RESPONSABLE_ID;Ordenes_Trabajo.FECHA_ENTRADA;Ordenes_Trabajo.FECHA_SALIDA;Ordenes_Trabajo.TIPO;Ordenes_Trabajo.HORAS;Ordenes_Trabajo.IMPORTE;Ordenes_Trabajo.DESCRIPCION;FREE_EDITAR;FREE_BORRAR'; 
+ $('strTipoEditor').value = 'AUTO;AUTO;DATE;DATE;AUTO;NORMAL;NORMAL;AREA;FREE_EDITAR;FREE_BORRAR'; 
+ $('strCamposDec').value = 'Reparación;Responsable;Entrada;Salida;Tipo;Horas;Importe;Descripción;Editar;Borrar'; 
+ $('strCamposWidth').value = '12%;13%;10%;10%;10%;10%;10%;15%;5%;5%'; 
+ $('strLinksUlContentServlet').value = '/serteca/Reparacion/ReparacionUlContentServlet;/serteca/Trabajador/TrabajadorUlContentServlet;;;/serteca/OrdenTrabajo/TipoOrdenTrabajoUlContentServlet;;;;;';
+ $('strMetodosController').value = 'ReparacionIdOrdenTrabajoParsed;ResponsableIdOrdenTrabajoParsed;FechaEntradaOrdenTrabajoParsed;FechaSalidaOrdenTrabajoParsed;TipoOrdenTrabajoParsedLabel;HorasOrdenTrabajoParsed;ImporteOrdenTrabajoParsed;DescripcionOrdenTrabajoParsed;EditOrdenTrabajo;DeleteOrdenTrabajo';
+ $('strLinksUpdateServlet').value = '/serteca/OrdenTrabajo/UpdateReparacionIdServlet;/serteca/OrdenTrabajo/UpdateResponsableIdServlet;/serteca/OrdenTrabajo/UpdateFechaEntradaServlet;/serteca/OrdenTrabajo/UpdateFechaSalidaServlet;/serteca/OrdenTrabajo/UpdateTipoServlet;/serteca/OrdenTrabajo/UpdateHorasServlet;/serteca/OrdenTrabajo/UpdateImporteServlet;/serteca/OrdenTrabajo/UpdateDescripcionServlet;editar;borrar';   
+ $('strEsOrdenable').value="1;1;1;1;1;1;1;1;0;0";
+ $('strEventos').value = 'dblclick;dblclick;dblclick;dblclick;dblclick;dblclick;dblclick;dblclick;click;click';  
+ $('strValidarColumnasGrid').value = 'requerido-es;requerido-es;requerido-es validate-date-separador-es;validate-date-separador-es;;validate-number-es;validate-number-es;;;';  
+ $('strFormCampos').value = 'Ordenes_Trabajo.ID;Ordenes_Trabajo.REPARACION_ID;Ordenes_Trabajo.RESPONSABLE_ID;Ordenes_Trabajo.FECHA_ENTRADA;Ordenes_Trabajo.FECHA_SALIDA;Ordenes_Trabajo.TIPO;Ordenes_Trabajo.HORAS;Ordenes_Trabajo.IMPORTE;Ordenes_Trabajo.DESCRIPCION;Ordenes_Trabajo.OBSERVACION'; 
+ $('strFormCamposOblig').value = '1;1;1;1;;;;;;';  
+ $('strFormTipoEditor').value = 'HIDDEN;AUTO;AUTO;DATE;DATE;AUTO;NORMAL;NORMAL;AREA;AREA'; 
+ $('strFormCamposDec').value = 'ID;Reparación;Responsable;Fecha Entrada;Fecha Salida;Tipo;Horas;Importe;Descripción;Observaciones';   
+ $('strFormCamposWidth').value = ';400px;350px;350px;350px;400px;300px;350px;700px;700px';  
+ $('strFormLinksUlContentServlet').value = ';/serteca/Reparacion/ReparacionUlContentServlet;/serteca/Trabajador/TrabajadorUlContentServlet;;;/serteca/OrdenTrabajo/TipoOrdenTrabajoUlContentServlet;;;;';
+ $('strFormLinksElementServlet').value = ';/serteca/OrdenTrabajo/OrdenTrabajoReparacionServlet;/serteca/OrdenTrabajo/OrdenTrabajoTrabajadorServlet;;;;;;;';  
+ $('strFormMetodosController').value = 'Id;ReparacionIdOrdenTrabajoParsed;ResponsableIdOrdenTrabajoParsed;FechaEntradaOrdenTrabajoParsed;FechaSalidaOrdenTrabajoParsed;TipoOrdenTrabajoParsed;HorasOrdenTrabajoParsed;ImporteOrdenTrabajoParsed;DescripcionOrdenTrabajoParsed;ObsOrdenTrabajoParsed';
+ $('strValidarCamposForm').value= ';requerido-es;requerido-es;requerido-es validate-date-separador-es;validate-date-separador-es;;validate-number-es;validate-number-es;;';  
+ $('strFormCabeceraLinks').value = '';
+ $('strFormCabeceraFunctions').value = '';
+ $('strCabeceraLinks').value = 'Trabajadores;Reparaciones';
+ $('strCabeceraFunctions').value = 'verTrabajadores();verReparaciones()'; 
+ $('strFiltroLinks').value = 'Todas;En Ejecución;Finalizadas';
+ $('strFiltroFunctions').value = '0;1;2';    
+ $('strSeparadorHora').value =":";
+ cargaQueryGrid();
+ cargaGrid();
+ crear(); 
+}
+
+function verFacturas()
+{
+ $('iModoVisualizacion').value = '0';
+ $('viewedRows').value = '20';
+ $('strTotalRegistros').value = '0';
+ $('strGap').value = '0';
+ $('strTableId').value = 'Facturas';   
+ $('strFunction').value = 'verFacturas()';
+ $('strTituloLista').value = 'Lista de Facturas';
+ $('strTituloForm').value = 'Factura'; 
+ $('tableContentServlet').value = '/serteca/Factura/FacturaTableContentServlet';
+ $('strLinkAddServlet').value = '/serteca/Factura/AddFacturaServlet';
+ $('strLinkDeleteServlet').value = '/serteca/Factura/DeleteFacturaServlet';
+ $('strLinkEditServlet').value = '/serteca/Factura/FacturaElementServlet';
+ $('strLinkDetallePdfServlet').value = '/serteca/Factura/GetFacturaDetallePdfServlet'; 
+ $('strLinkInformePdfServlet').value = '';  
+ $('strLinkListaPdfServlet').value = '/serteca/Factura/FacturaTableContentPdfServlet';   
+ $('strLinkEditParam').value = 'facturas.ID=';  
+ $('strCampos').value = 'Facturas.CLIENTE_ID;Facturas.REPARACION_ID;Facturas.FECHA;Facturas.IMPORTE;Facturas.IMPORTECALCULADO;Facturas.ESTADO;FREE_EDITAR;FREE_BORRAR'; 
+ $('strTipoEditor').value = 'AUTO;AUTO;DATE;NORMAL;;;FREE_EDITAR;FREE_BORRAR'; 
+ $('strCamposDec').value = 'Cliente;Reparación;Fecha Factura;Importe;Cálculo;Estado;Editar;Borrar'; 
+ $('strCamposWidth').value = '25%;25%;12%;10%;8%;10%;5%;5%'; 
+ $('strLinksUlContentServlet').value = '/serteca/Cliente/ClienteUlContentServlet;/serteca/Reparacion/ReparacionUlContentServlet;;;;;;;';
+ $('strMetodosController').value = 'ClienteIdFacturasParsed;ReparacionIdFacturasParsed;FechaIniFacturasParsed;ImporteFacturasParsed;ImporteCalculadoFacturasParsed;EstadoFacturasParsedLabel;EditFactura;DeleteFactura';
+ $('strLinksUpdateServlet').value = '/serteca/Factura/UpdateClienteIdServlet;/serteca/Factura/UpdateReparacionIdServlet;/serteca/Factura/UpdateFechaIniServlet;/serteca/Factura/UpdateImporteServlet;;editar;borrar';   
+ $('strEsOrdenable').value="1;1;1;1;0;0;0;0";
+ $('strEventos').value = 'dblclick;dblclick;dblclick;dblclick;;;click;click';  
+ $('strValidarColumnasGrid').value = 'requerido-es;requerido-es;requerido-es validate-date-separador-es;validate-number-es;;;;';  
+ $('strFormCampos').value = 'Facturas.ID;Facturas.CLIENTE_ID;Facturas.REPARACION_ID;Facturas.FECHA;Facturas.IMPORTE;Facturas.IMPORTECALCULADO;Facturas.ESTADO;Facturas.DESCRIPCION;Facturas.OBSERVACION'; 
+ $('strFormCamposOblig').value = '1;1;1;1;;;;;'; 
+ $('strFormTipoEditor').value = 'HIDDEN;AUTO;AUTO;DATE;NORMAL;LECTURA;AUTO;AREA;AREA'; 
+ $('strFormCamposDec').value = 'ID;Cliente;Reparación;Fecha Inicio;Importe;Importe Líneas Factura;Estado;Descripción;Observaciones';   
+ $('strFormCamposWidth').value = ';400px;350px;350px;350px;350px;400px;700px;700px';  
+ $('strFormLinksUlContentServlet').value = ';/serteca/Cliente/ClienteUlContentServlet;/serteca/Reparacion/ReparacionUlContentServlet;;;;/serteca/Factura/EstadoFacturaUlContentServlet;;';
+ $('strFormLinksElementServlet').value = ';/serteca/Factura/FacturaClienteServlet;/serteca/Factura/FacturaReparacionServlet;;;;/serteca/Factura/EstadoFacturaServlet;;';  
+ $('strFormMetodosController').value = 'Id;ClienteIdFacturasParsed;ReparacionIdFacturasParsed;FechaIniFacturasParsed;ImporteFacturasParsed;ImporteCalculadoFacturasParsed;EstadoFacturasParsed;DescripcionFacturasParsed;ObsFacturasParsed';
+ $('strValidarCamposForm').value= ';requerido-es;requerido-es;requerido-es validate-date-separador-es;validate-number-es;;requerido-es;;';  
+ $('strFormCabeceraLinks').value = 'Lineas de Factura';
+ $('strFormCabeceraFunctions').value = 'verLineasFactura()'; 
+ $('strCabeceraLinks').value = 'Clientes;Reparaciones';
+ $('strCabeceraFunctions').value = 'verClientes();verReparaciones()'; 
+ $('strFiltroLinks').value = 'Todas;Emitidas;Pendientes;Cobradas';
+ $('strFiltroFunctions').value = '0;1;2;3';  
+ $('strSeparadorHora').value =":";
+ cargaQueryGrid();
+ cargaGrid();
+ crear(); 
+}
+
+function verLineasFactura()
+{
+ $('iModoVisualizacion').value = '0';
+ $('viewedRows').value = '20';
+ $('strTotalRegistros').value = '0';
+ $('strGap').value = '0';
+ $('strTableId').value = 'Lineas_Factura';   
+ $('strFunction').value = 'verLineasFactura()';
+ $('strTituloLista').value = 'Lista de Lineas de Factura';
+ $('strTituloForm').value = 'Linea de Factura';
+ $('tableContentServlet').value = '/serteca/LineaFactura/LineaFacturaTableContentServlet';
+ $('strLinkAddServlet').value = '/serteca/LineaFactura/AddLineaFacturaServlet';
+ $('strLinkDeleteServlet').value = '/serteca/LineaFactura/DeleteLineaFacturaServlet';
+ $('strLinkEditServlet').value = '/serteca/LineaFactura/LineaFacturaElementServlet';
+ $('strLinkDetallePdfServlet').value = '/serteca/LineaFactura/GetLineaFacturaDetallePdfServlet'; 
+ $('strLinkInformePdfServlet').value = '';  
+ $('strLinkListaPdfServlet').value = '/serteca/LineaFactura/LineaFacturaTableContentPdfServlet';   
+ $('strLinkEditParam').value = 'lineasfactura.ID=';  
+ $('strCampos').value = 'Lineas_Factura.FACTURA_ID;Lineas_Factura.DESCRIPCION;Lineas_Factura.IMPORTE;Lineas_Factura.UNIDADES;Lineas_Factura.DTO;Lineas_Factura.IMPORTECONDTO;FREE_EDITAR;FREE_BORRAR'; 
+ $('strTipoEditor').value = 'AUTO;NORMAL;NORMAL;NORMAL;NORMAL;;FREE_EDITAR;FREE_BORRAR'; 
+ $('strCamposDec').value = 'Factura;Descripción;Importe(ud.);Unidades;Descuento(%);Total;Editar;Borrar'; 
+ $('strCamposWidth').value = '20%;30%;10%;10%;10%;10%;5%;5%'; 
+ $('strLinksUlContentServlet').value = '/serteca/Factura/FacturaUlContentServlet;;;;;;;';
+ $('strMetodosController').value = 'FacturaIdLineaFacturaParsed;DescripcionLineaFacturaParsed;ImporteLineaFacturaParsed;UnidadesLineaFacturaParsed;DtoLineaFacturaParsed;ImporteTotalConDtoLineaFactura;EditLineaFactura;DeleteLineaFactura';
+ $('strLinksUpdateServlet').value = '/serteca/LineaFactura/UpdateFacturaIdServlet;/serteca/LineaFactura/UpdateDescripcionServlet;/serteca/LineaFactura/UpdateImporteServlet;/serteca/LineaFactura/UpdateUnidadesServlet;/serteca/LineaFactura/UpdateDtoServlet;;editar;borrar';  
+ $('strEsOrdenable').value="1;1;1;1;1;0;0;0";
+ $('strEventos').value = 'dblclick;dblclick;dblclick;dblclick;dblclick;;click;click'; 
+ $('strValidarColumnasGrid').value = 'requerido-es;requerido-es;requerido-es validate-number-es;requerido-es validate-number-es;validate-number-es;;;';   
+ $('strFormCampos').value = 'Lineas_Factura.ID;Lineas_Factura.FACTURA_ID;Lineas_Factura.DESCRIPCION;Lineas_Factura.IMPORTE;Lineas_Factura.UNIDADES;Lineas_Factura.DTO;Lineas_Factura.IMPORTECONDTO;Lineas_Factura.OBSERVACION'; 
+ $('strFormCamposOblig').value = '1;1;1;1;1;;;';  
+ $('strFormTipoEditor').value = 'HIDDEN;AUTO;AREA;NORMAL;NORMAL;NORMAL;LECTURA;AREA'; 
+ $('strFormCamposDec').value = 'ID;Factura;Descripción;Importe(ud.);Unidades;Descuento(%);Total;Observaciones';   
+ $('strFormCamposWidth').value = ';400px;700px;350px;350px;350px;350px;700px';  
+ $('strFormLinksUlContentServlet').value = ';/serteca/Factura/FacturaUlContentServlet;;;;;;';
+ $('strFormLinksElementServlet').value = ';/serteca/LineaFactura/LineaFacturaFacturaServlet;;;;;;';  
+ $('strFormMetodosController').value = 'Id;FacturaIdLineaFacturaParsed;DescripcionLineaFacturaParsed;ImporteLineaFacturaParsed;UnidadesLineaFacturaParsed;DtoLineaFacturaParsed;ImporteTotalConDtoLineaFactura;ObsLineaFacturaParsed';
+ $('strValidarCamposForm').value= ';requerido-es;requerido-es;requerido-es validate-number-es; validate-number-es; validate-number-es;;'; 
+ $('strFormCabeceraLinks').value = '';
+ $('strFormCabeceraFunctions').value = ''; 
+ $('strCabeceraLinks').value = 'Factura';
+ $('strCabeceraFunctions').value = 'verFacturas()';  
+ $('strFiltroLinks').value = '';
+ $('strFiltroFunctions').value = '';  
+ $('strSeparadorHora').value =":";
+ cargaQueryGrid();
+ cargaGrid();
+ crear(); 
+}
+
+ </script>
+
+
+</head>
+<body onLoad="ponerFiltro('');resetParam();resetQuery();limpiar();verAlarmas();">
+			  
+<div id="menu">
+
+<ul>  
+  <li id="nav-trabajadores" onclick="document.body.id='trabajadores'"><a href="#" onclick="ponerFiltro('');resetParam();resetQuery();limpiar();verTrabajadores();">Trabajadores</a></li>
+  <li id="nav-marcas" onclick="document.body.id='marcas'"><a href="#" onclick="ponerFiltro('');resetParam();resetQuery();limpiar();verMarcas();">Marcas</a></li>
+  <!--<li id="nav-modelos" onclick="document.body.id='modelos'"><a href="#" onclick="resetFiltro();resetParam();resetQuery();limpiar();verModelos();">modelos</a></li>-->
+  <li id="nav-vehiculosCortesia" onclick="document.body.id='vehiculosCortesia'"><a href="#" onclick="ponerFiltro('');resetParam();resetQuery();limpiar();verVehiculoCortesias();">Veh&iacute;culos&nbsp;de&nbsp;Cortes&iacute;a</a></li>
+  <li id="nav-clientes" onclick="document.body.id='clientes'"><a href="#" onclick="ponerFiltro('');resetParam();resetQuery();limpiar();verClientes();">Clientes</a></li>
+  <li id="nav-vehiculos" onclick="document.body.id='vehiculos'"><a href="#" onclick="ponerFiltro('');resetParam();resetQuery();limpiar();verVehiculos();">Veh&iacute;culos</a></li>
+  <!--<li id="nav-prestamos" onclick="document.body.id='prestamos'"><a href="#" onclick="ponerFiltro('');resetParam();resetQuery();limpiar();verPrestamos();">prestamos</a></li>-->
+  <li id="nav-reparaciones" onclick="document.body.id='reparaciones'"><a href="#" onclick="ponerFiltro('');resetParam();resetQuery();limpiar();verReparaciones();">Reparaciones</a></li>
+  <!--<li id="nav-ordenesTrabajo" onclick="document.body.id='ordenesTrabajo'"><a href="#" onclick="resetFiltro();resetParam();resetQuery();limpiar();verOrdenesTrabajo();">ordenesTrabajo</a></li>-->
+  <li id="nav-facturas" onclick="document.body.id='facturas'"><a href="#" onclick="ponerFiltro('');resetParam();resetQuery();limpiar();verFacturas();">Facturas</a></li>
+  <!--<li id="nav-lineasFactura" onclick="document.body.id='lineasFactura'"><a href="#" onclick="resetFiltro();resetParam();resetQuery();limpiar();verLineasFactura();">lineasFactura</a></li>-->
+  </ul>
+ </div>
+ 
+
+
+ <div id ="div_global" class="div_global">
+  <div id="div_query" name="div_query">
+  </div>  
+  <div id="div_header">
+  </div>
+  <div id="container">
+  </div>
+  <div id='placeholder' name='placeholder' class='placeholder'>
+  </div>
+  <div id="div_nuevo" name="div_nuevo">
+  </div>   
+ </div>
+ 
+  <div id="pie">
+  <span class='inicio'>
+  <ul>
+  <li><a href="#" onclick="ponerFiltro('');resetParam();resetQuery();limpiar();verAlarmas();">Inicio</a></li>
+</ul> 
+</span>
+ Serteca
+ </div>
+<input type="hidden" id="strParam" value="">
+<input type="hidden" id="strQuery" value="">
+<input type="hidden" id="strFiltroParam" value="">
+
+<input type="hidden" id="iModoVisualizacion" value="">
+<input type="hidden" id="viewedRows" value="">
+<input type="hidden" id="strTotalRegistros" value="">
+<input type="hidden" id="strGap" value="">
+
+<input type="hidden" id="strTableId" value="">
+<input type="hidden" id="strFunction" value="">
+<input type="hidden" id="strTituloLista" value="">
+<input type="hidden" id="strTituloForm" value="">
+<input type="hidden" id="tableContentServlet" value="">
+<input type="hidden" id="strLinkAddServlet" value="">
+<input type="hidden" id="strLinkDeleteServlet" value="">
+<input type="hidden" id="strLinkEditServlet" value="">
+<input type="hidden" id="strLinkEditParam" value="">
+<input type="hidden" id="strLinkDetallePdfServlet" value="">
+<input type="hidden" id="strLinkInformePdfServlet" value="">
+<input type="hidden" id="strLinkListaPdfServlet" value="">
+
+<input type="hidden" id="strCampos" value="">
+<input type="hidden" id="strTipoEditor" value="">
+<input type="hidden" id="strCamposDec" value="">
+<input type="hidden" id="strCamposWidth" value="">
+<input type="hidden" id="strLinksUlContentServlet" value="">
+<input type="hidden" id="strMetodosController" value="">
+<input type="hidden" id="strLinksUpdateServlet" value="">
+<input type="hidden" id="strEsOrdenable" value="">
+<input type="hidden" id="strEventos" value="">
+<input type="hidden" id="strValidarColumnasGrid" value="">
+
+<input type="hidden" id="strFormCampos" value="">
+<input type="hidden" id="strFormCamposOblig" value="">
+<input type="hidden" id="strFormTipoEditor" value="">
+<input type="hidden" id="strFormCamposDec" value="">
+<input type="hidden" id="strFormCamposWidth" value="">
+<input type="hidden" id="strFormLinksUlContentServlet" value="">
+<input type="hidden" id="strFormLinksElementServlet" value="">
+<input type="hidden" id="strFormMetodosController" value="">
+<input type="hidden" id="strValidarCamposForm" value="">
+
+<input type="hidden" id="strCabeceraLinks" value="">
+<input type="hidden" id="strCabeceraFunctions" value="">
+
+<input type="hidden" id="strFormCabeceraLinks" value="">
+<input type="hidden" id="strFormCabeceraFunctions" value="">
+
+<input type="hidden" id="strFiltroLinks" value="">
+<input type="hidden" id="strFiltroFunctions" value="">
+<input type="hidden" id="strSeparadorFecha" value="">
+<input type="hidden" id="strSeparadorHora" value="">
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+1;Contado
+2;Tarjeta
+3;Domiciliación Bancaria
+4;Transferencia Bancaria
+5;Recibo a 7 días
+6;Recibo a 15 días
+7;Recibo a 21 días
+8;Recibo a 30 días
+9;Recibo a 45 días
+10;Recibo a 60 días
+11;Recibo a 90 días
+12;Recibo a 120 días
+13;Recibo a 30, 60 y 90 días
+14;Recibo a 60 y 90 días
+15;Recibo a la vista

@@ -1,0 +1,414 @@
+#viewPort
+{
+	float:left;
+	z-index: 5;
+}
+
+#alta_dinamica_trabajador
+{
+	position: absolute;
+	left: 30px;
+	top: 300px;
+	background-color: none;
+	border: yelow 1px red;
+	
+}
+
+#trabajador
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	background-color: none;
+	border: yelow 1px red;
+}
+#trabajador_header
+{
+	background-color: none;
+	border: solid 1px red;
+}
+#trabajador_nombre
+{
+	width:100px;
+}
+#trabajador_apellido
+{
+	width:100px;
+}
+#trabajador_fecha_alta
+{
+	width:100px;
+}
+#trabajador_fecha_baja
+{
+	width:100px;	
+}
+#trabajador_nombre_apellidos
+{
+	width:200px;
+}
+.data_trabajador_nombre_p
+{
+	width:100px;
+	background: green;		
+}
+.data_trabajador_apellido_p
+{
+	width:100px;
+	background: green;		
+}
+.data_trabajador_fecha_alta_p
+{
+	width:100px;
+	background: green;		
+}
+.data_trabajador_fecha_baja_p
+{
+	width:100px;
+	background: green;		
+}
+.data_trabajador_nombre_apellidos_p
+{
+	width:200px;
+	background: green;	
+}
+.data_trabajador_nombre_i
+{
+	width:100px;
+	background: red;	
+}
+.data_trabajador_apellido_i
+{
+	width:100px;
+	background: red;	
+}
+.data_trabajador_fecha_alta_i
+{
+	width:100px;
+	background: red;	
+}
+.data_trabajador_fecha_baja_i
+{
+	width:100px;
+	background: red;	
+}
+.data_trabajador_nombre_apellidos_i
+{
+	width:200px;
+	background: red;
+}
+
+#dinamic_grid_data_trabajador,#data_grid_header_trabajador
+{
+ 	width:600px;
+}
+
+/* Esto es para las marcas */
+#alta_dinamica_marca
+{
+	position: absolute;
+	left: 30px;
+	top: 300px;
+	background-color: none;
+	border: yelow 1px red;
+}
+#marca
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	background-color: none;
+	border: yelow 1px red;
+}
+#marca_header
+{
+	background-color: none;
+	border: solid 1px red;
+}
+#marca_nombre
+{
+	width:100px;
+}
+#marca_id
+{
+	width:50px;
+}
+.data_marca_nombre_p
+{
+	width:100px;
+	background: green;		
+}
+
+.data_marca_id_p
+{
+	width:50px;
+	background: green;		
+}
+.data_marca_nombre_i
+{
+	width:100px;
+	background: red;	
+}
+.data_marca_id_i
+{
+	width:50px;
+	background: red;	
+}
+
+#dinamic_grid_data_marca,#data_grid_header_marca
+{
+ 	width:300px;
+}
+
+/* Esto es para los modelos */
+#alta_dinamica_modelo
+{
+	position: absolute;
+	left: 30px;
+	top: 300px;
+	background-color: none;
+	border: yelow 1px red;
+}
+#modelo
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	background-color: none;
+	border: yelow 1px red;
+}
+#modelo_header
+{
+	background-color: none;
+	border: solid 1px red;
+}
+#modelo_nombre
+{
+	width:100px;
+}
+#modelo_id
+{
+	width:100px;
+}
+.data_modelo_nombre_p
+{
+	width:100px;
+	background: green;		
+}
+
+.data_modelo_id_p
+{
+	width:100px;
+	background: green;		
+}
+.data_modelo_marca_id_p
+{
+	width:100px;
+	background: green;		
+}
+.data_modelo_nombre_i
+{
+	width:100px;
+	background: red;	
+}
+.data_modelo_id_i
+{
+	width:100px;
+	background: red;	
+}
+.data_modelo_marca_id_i
+{
+	width:100px;
+	background: red;		
+}
+#dinamic_grid_data_modelo,#data_grid_header_modelo
+{
+ 	width:600px;
+}
+
+/* Esto es para los VEHICULOS */
+#alta_dinamica_vehiculo
+{
+	position: absolute;
+	left: 30px;
+	top: 300px;
+	background-color: none;
+	border: yelow 1px red;
+}
+#vehiculo
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	background-color: none;
+}
+#vehiculo_header
+{
+	background-color: none;
+	border: solid 1px red;
+}
+#dinamic_grid_data_vehiculo,#data_grid_header_vehiculo
+{
+ 	width:800px;
+}
+/* Esto es para las REPARACIONES */
+#alta_dinamica_reparacion
+{
+	position: absolute;
+	left: 30px;
+	top: 300px;
+	background-color: none;
+	visibility:hidden;
+	border: solid 1px #CCCCCC;
+}
+#reparacion
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	background-color: none;
+}
+#reparacion_header
+{
+	width:300px;
+	background-color: none;
+	border: solid 1px #CCCCCC;
+}
+#reparacion_header input
+{
+	border:1px solid #CCCCCC;
+	background-color:white;
+	height:18px;
+}
+#dinamic_grid_data_reparacion,#data_grid_header_reparacion
+{
+ 	width:890px;
+}
+
+#dinamic_grid_data_reparacion td
+{
+	border: 1px solid #CCCCCC;
+}
+#data_grid_header_reparacion th
+{
+	border: 1px solid #CCCCCC;
+}
+
+
+/*editores inplace*/
+
+.normal-inplaceeditor-form
+{
+ background-color: #ffffff;
+ font-size: 12px;
+ width: 60px
+ 
+}
+.normal-inplaceeditor-form input
+{
+	width:60px;
+	height:18px;
+	background-color: #ffffff;
+	border: solid 1px #000000;
+	font-size: 12px;
+}
+.normal-inplaceeditor-saving
+{
+	
+}
+.normal-inplaceeditor-loading
+{
+
+}
+
+.inplaceeditor-form{
+  display:inline;
+  border: 1px solid #ff0000; 
+}
+
+
+/* Esto es para los CLIENTES */
+#alta_dinamica_cliente
+{
+	position: absolute;
+	left: 30px;
+	top: 300px;
+	background-color: none;
+	visibility:hidden;
+	border: solid 1px #CCCCCC;
+}
+#cliente
+{
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	background-color: none;
+}
+#cliente_header
+{
+	width:200px;
+	background-color: none;
+	border: solid 1px #CCCCCC;
+}
+
+#cliente_header input
+{
+	border:1px solid #CCCCCC;
+	background-color:white;
+	height:18px;
+}
+#dinamic_grid_data_cliente,#data_grid_header_cliente
+{
+ 	width:890px;
+}
+#dinamic_grid_data_cliente td
+{
+	border: 1px solid #CCCCCC;
+}
+#data_grid_header_cliente th
+{
+	border: 1px solid #CCCCCC;
+}
+
+/*para la capa de autocompletado de la grid*/
+
+.in-place-auto-div
+{
+	background-color: red;
+	border: 1px solid black;
+	height: 200px;
+	overflow: auto;
+	padding: 0px;
+	padding-right: 5px;
+	padding-left: 0px;
+}
+
+.in-place-auto-div ul
+{
+	padding-right: inherit;	
+	font-size: 20px;
+	width: 100%;
+	z-index: 100;	
+}
+
+.in-place-auto-div li
+{
+	padding-right: inherit;	
+	width: 100%;
+	z-index: 100;	
+}
+
+
+
+
+.in-place-auto-div li:HOVER, .selected
+{
+	background-color: #888;
+	cursor: pointer;
+	z-index: 100;	
+}
+
+#dinamic_grid_data_trabajador_viewport, #container, #dinamic_grid_data_trabajador_container
+{
+	z-index: 5;	
+}

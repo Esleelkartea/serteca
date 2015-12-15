@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<empresa>
+	<nombre>SERTECA</nombre>
+	<direccion>Botica Vieja, 21 Lonja - 48014 Bilbao (Bizkaia)</direccion>
+	<telefono>965778455</telefono>
+	<fax>665722455</fax>
+	<email>a@b.com</email>
+	<numeroRegistro>25871002-F</numeroRegistro>
+	<imgurl>c:\\serteca-gestion-app\\xsl\\filtro.gif</imgurl>	
+</empresa>

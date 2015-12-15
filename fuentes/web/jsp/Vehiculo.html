@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html>
+<head>
+<title>Serteca-Gesti&oacute;n de Veh&iacute;culos</title>
+<link href="/serteca/css/admin.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" media="all" href="/serteca/css/calendar.css"/>
+<script src="/serteca/js/utils/prototype.js" type="text/javascript"></script>
+<script src="/serteca/js/utils/scriptaculous.js" type="text/javascript"></script>
+<script src='/serteca/js/utils/rico.js' type="text/javascript"></script>
+<script src='/serteca/js/utils/zk_widgets.js' type="text/javascript"></script>
+<script type="text/javascript" src="/serteca/js/utils/zk_editors.js"></script>
+<script type="text/javascript" src="/serteca/js/utils/calendar.js"></script>
+<script type="text/javascript" src="/serteca/js/utils/calendar-setup.js"></script>							
+<script type="text/javascript" src="/serteca/js/utils/calendar-lang/calendar-es.js"></script>
+<script language="javascript" type="">
+function preCarga()
+{
+ var num_lineas_visibles = 10;
+ var campos = new Array("ID","MATR", "CHASIS", "FECHA", "CLIENTE", "MODELO", "VERSION", "MOTOR", "COLOR", "OBS");
+ var i=0,j=0,str="",strH="";
+ strH= strH + "<table border='1' id='data_grid_header_vehiculo' name='data_grid_header_vehiculo'><tr>";
+ for (j=0;j<campos.length;j++)
+ {
+ 	strH = strH + "<th style='width:80px'>" + campos[j] + "</th>";
+ }
+ strH = strH + "</tr></table>"; 
+ $(div_header_vehiculo).innerHTML=strH;
+ str = "<table border='1' id='dinamic_grid_data_vehiculo' name='dinamic_grid_data_vehiculo'>"
+ for (i=0;i<num_lineas_visibles;i++)
+ {
+ 	str = str + "<tr>";
+ 	for (j=0;j<campos.length;j++)
+ 	{
+ 		str = str + "<td style='width:80px'>&nbsp;</td>";
+ 	}
+ 	str = str + "</tr>";
+ }
+ str = str + "</table>";
+ $(viewPort).innerHTML=str;
+ 
+}
+ function filtrarVehiculo()
+ { 
+  var regg = new regist();
+  regg.addElemento(new editor('NORMAL','/serteca/Vehiculo/UpdateMatriculaServlet',2,'MatriculaParsed',null));
+  regg.addElemento(new editor('NORMAL','/serteca/Vehiculo/UpdateChasisIdServlet',3,'ChasisIdParsed',null));
+  regg.addElemento(new editor('DATE','/serteca/Vehiculo/UpdateFechaMatriculacionServlet',4,'FechaMatriculacionParsed',null));
+  regg.addElemento(new editor('AUTO','/serteca/Vehiculo/UpdateClienteIdServlet',5,'ClienteIdParsed','/serteca/Cliente/ClienteUlContentServlet'));
+  regg.addElemento(new editor('AUTO','/serteca/Vehiculo/UpdateModeloIdServlet',6,'ModeloIdParsed','/serteca/Modelo/ModeloUlContentServlet'));
+  regg.addElemento(new editor('NORMAL','/serteca/Vehiculo/UpdateVersionServlet',7,'VersionParsed',null));
+  regg.addElemento(new editor('NORMAL','/serteca/Vehiculo/UpdateMotorIdServlet',8,'MotorIdParsed',null));
+  regg.addElemento(new editor('NORMAL','/serteca/Vehiculo/UpdateColorServlet',9,'ColorParsed',null));
+  regg.addElemento(new editor('NORMAL','/serteca/Vehiculo/UpdateObsServlet',10,'ObsParsed',null));
+
+  
+  var viewedRows = 8;
+  var linkedServlet= '/serteca/Vehiculo/VehiculoTableContentServlet';
+  var dinamic_grid_data_id = 'dinamic_grid_data_vehiculo';
+  var inputQueryId = 'queryVehiculo';
+  try{
+   $(myLiveRicoGridVehiculo);
+  }catch (Exception){
+   myLiveRicoGridVehiculo =  new Ajax.ZkLiveGrid(
+   											dinamic_grid_data_id, 
+   											viewedRows,
+   											viewedRows,
+   											linkedServlet,
+   											regg,
+   											{}
+   								);
+   }
+   myLiveRicoGridVehiculo.setRequestParams('query=' + $(inputQueryId).value);
+   myLiveRicoGridVehiculo.resetContents();
+   myLiveRicoGridVehiculo.requestContentRefresh(0);
+   ajaxEngine.registerAjaxObject( 'configureWebSearchRows',   
+   								new SearchRowsConfigurator(myLiveRicoGridVehiculo, viewedRows));
+ } 
+ </script>
+
+</head>
+<body onLoad="preCarga();filtrarVehiculo();">
+			  
+<div id="vehiculo">
+ <div id="vehiculo_header">
+   Vehiculo &nbsp;
+    <input type="text" name="queryVehiculo" id="queryVehiculo" value=""/>
+  <script language="javaScript">
+	new Form.Element.DelayedObserver('queryVehiculo','0.5',filtrarVehiculo);
+  </script>
+ </div>
+ <div id="tabla_dinamica_vehiculo">
+  <div id="div_header_vehiculo">
+  </div>
+  <div id="container">
+   <div id="viewPort">
+   </div>
+  </div>
+ </div>
+</div>
+
+<div id="alta_dinamica_vehiculo">
+ <div> 
+  Alta vehiculo &nbsp;
+ </div>
+ <div id="alta_dinamica_vehiculo_form">
+  <form action="" name="altaVehiculoForm" id="altaVehiculoForm" method="POST">
+  <table summary="tabla de alta del vehiculo">
+   <tr>
+	<td><b>Matr&iacute;cula</b></td>
+	<td><input type="text"  name="Vehiculos.MATRICULA" id="Vehiculos.MATRICULA" value="" ></td>
+   </tr>
+	<tr>
+	<td><b>Chasis</b></td>
+	<td><input type="text"  name="Vehiculos.CHASIS_ID" id="Vehiculos.CHASIS_ID" value="" ></td>
+   </tr>
+   <tr>
+	<td><b>Fecha de Matriculaci&oacute;n</b></td>
+	<td><input type="text"  name="Vehiculos.FECHA_MATRICULACION" id="Vehiculos.FECHA_MATRICULACION" value="" >
+	<a href="#"><img id="calendar_image_trigger" src="../img/calendar.gif" alt="calendario" width="19" height="17" border="0"></a></td>
+	</tr>
+   <script type="text/javascript">
+	<!--
+		Calendar.setup({
+			inputField     :    "Vehiculos.FECHA_MATRICULACION",            // id of the input field
+				ifFormat       :    "%d-%m-%Y",      	      // format of the input field
+				button         :    "calendar_image_trigger" // trigger for the calendar (button ID)
+			});
+	-->
+	</script>
+	<tr>
+	<td><b>Cliente</b></td>
+	<td><input type="text"  name="Vehiculos.CLIENTE_ID" id="Vehiculos.CLIENTE_ID" value="" ></td>
+   <div id="ClientesUpdate" style="display:none;border:1px solid black;background-color:white;overflow:auto;height:300px"></div>
+   </tr>
+      	<script type="text/javascript" language="javascript" charset="ISO-8859-1">
+		// <![CDATA[
+	 		new Ajax.ZkAutocompleter('Vehiculos.CLIENTE_ID','ClientesUpdate','/serteca/Cliente/ClienteUlContentServlet',{minChars:2});
+		// ]]>
+	</script>
+   <tr>
+	<td><b>Modelo</b></td>
+	<td><input type="text"  name="Vehiculos.MODELO_ID" id="Vehiculos.MODELO_ID" value="" ></td>
+   <div id="ModelosUpdate" style="display:none;border:1px solid black;background-color:white;overflow:auto;height:300px"></div>
+   </tr>
+      	<script type="text/javascript" language="javascript" charset="ISO-8859-1">
+		// <![CDATA[
+	 		new Ajax.Autocompleter('Vehiculos.MODELO_ID','ModelosUpdate','/serteca/Modelo/ModeloUlContentServlet',{});
+		// ]]>
+	</script>
+	<tr>
+	<td><b>Versi&oacute;n</b></td>
+	<td><input type="text"  name="Vehiculos.VERSION" id="Vehiculos.VERSION" value="" ></td>
+   </tr>
+   <tr>
+	<td><b>Motor</b></td>
+	<td><input type="text"  name="Vehiculos.MOTOR_ID" id="Vehiculos.MOTOR_ID" value="" ></td>
+   </tr>
+   <tr>
+	<td><b>Color</b></td>
+	<td><input type="text"  name="Vehiculos.COLOR" id="Vehiculos.COLOR" value="" ></td>
+   </tr>
+   <tr>
+	<td><b>Observaciones</b></td>
+	<td><input type="text"  name="Vehiculos.OBSERVACION" id="Vehiculos.OBSERVACION" value="" ></td>
+   </tr>
+   <tr>
+	 <td colspan="2"><a href="#" onclick="altaVehiculo($(altaVehiculoForm))">Aceptar</a></td>
+	</tr>
+	<script language="javascript" type="text/javascript">
+	function altaVehiculo(form)
+	{
+		new Ajax.Request("/serteca/Vehiculo/AddVehiculoServlet",{ 
+													  parameters:Form.serialize(form),
+													  asynchronous:false
+													  }
+		);
+		Form.reset(form);
+		filtrarVehiculo();
+	}		
+	</script>
+  </table>
+  </form>
+ </div>
+</div>
+
+</body>
+</html>
